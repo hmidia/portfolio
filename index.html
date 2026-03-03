@@ -318,15 +318,68 @@
     }
 
     @media (max-width: 768px) {
-      nav { padding: 16px 24px; }
-      .hero { padding: 120px 24px 40px; }
-      .hero-title { font-size: 52px; }
-      .about-section, .work-section, .testimonials-section { padding-left: 24px; padding-right: 24px; }
-      .about-card { padding: 32px 24px; }
-      .project-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .cta-section { padding: 80px 24px; }
-      footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+      /* Hide custom cursor on touch devices */
+      .cursor, .cursor-ring { display: none; }
+      body { cursor: auto; }
+      .btn-lime { cursor: pointer; }
+
+      /* NAV — hamburger-free, condensed */
+      nav {
+        padding: 14px 20px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 12px; }
+      .nav-dot { display: none; }
+      .nav-right a { font-size: 12px; }
+
+      /* HERO */
+      .hero { padding: 110px 20px 40px; }
+      .hero-title {
+        font-size: clamp(48px, 14vw, 72px);
+        line-height: 0.95;
+      }
+      .hero-cursor-icon { font-size: 28px; margin-left: 8px; }
+
+      /* ABOUT */
+      .about-section { padding: 32px 20px 60px; }
+      .about-card {
+        padding: 28px 20px;
+        border-radius: 12px;
+      }
+      .about-card p { font-size: 14px; line-height: 1.75; }
+
+      /* WORK */
+      .work-section { padding: 0 20px 60px; }
+      .project-featured { height: 220px; border-radius: 10px; }
+      .project-meta { flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+      .project-tags { flex-wrap: wrap; }
+      .project-grid { grid-template-columns: 1fr; gap: 20px; }
+      .project-card img { height: 200px; }
+
+      /* SERVICES MARQUEE */
+      .marquee-track span { font-size: 12px; margin-right: 28px; }
+
+      /* CTA */
+      .cta-section { padding: 70px 20px; }
+      .cta-title { font-size: clamp(32px, 9vw, 48px); margin-bottom: 28px; }
+      .btn-lime { font-size: 13px; padding: 13px 30px; }
+
+      /* FOOTER */
+      footer {
+        padding: 20px;
+        flex-direction: column;
+        gap: 14px;
+        text-align: center;
+      }
+      footer div { justify-content: center; flex-wrap: wrap; gap: 20px; }
+    }
+
+    @media (max-width: 400px) {
+      .hero-title { font-size: 42px; }
+      .nav-links a { font-size: 11px; }
+      .nav-links { gap: 12px; }
     }
   </style>
 </head>
@@ -345,7 +398,7 @@
       <div class="nav-dot"></div>
     </div>
     <div class="nav-right">
-      <a href="mailto:hello@enochlight.com">Email</a>
+      <a href="/cdn-cgi/l/email-protection#28404d444447684d46474b4044414f405c064b4745">Email</a>
     </div>
   </nav>
 
@@ -439,7 +492,7 @@
         Let's make<br>something together?
       
       </h2>
-      <a href="mailto:hello@enochlight.com" class="btn-lime">Contact Me</a>
+      <a href="/cdn-cgi/l/email-protection#751d1019191a35101b1a161d191c121d015b161a18" class="btn-lime">Contact Me</a>
     </div>
   </section>
 
@@ -453,7 +506,7 @@
     <span>© 2024</span>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // CUSTOM CURSOR
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
@@ -493,11 +546,4 @@
     // SCROLL FADE-UP
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
-</body>
-</html>
+        if (e.isIn
