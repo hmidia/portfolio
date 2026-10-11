@@ -139,11 +139,14 @@ ul{margin:0;padding:0;list-style:none}
   position:relative;margin-top:clamp(40px,6vw,80px);
   line-height:0;
 }
+/* the exported wordmarks are already cropped to the 1440 frame,
+   so the bleed is baked in — show them at full width */
 .brush{
-  width:116%;max-width:none;margin-left:-8%;
+  width:100%;max-width:none;
   will-change:transform;
 }
 .brush--b{margin-top:-1.5%}
+
 
 /* ─────────────── services ─────────────── */
 .services{
@@ -352,7 +355,7 @@ ul{margin:0;padding:0;list-style:none}
   .proj{flex-direction:column !important;gap:24px;padding:28px !important;border-width:3px}
   .proj__panel{padding:26px}
   .proj__copy h3{font-size:30px}
-  .brush{width:150%;margin-left:-25%}
+  .brush{width:134%;margin-left:-17%}
 }
 
 /* ─────────────── reduced motion ─────────────── */
