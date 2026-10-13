@@ -575,9 +575,12 @@ em{font-style:italic}
   box-shadow:0 30px 50px -24px rgba(0,0,0,.85);
   display:grid;justify-items:center;gap:clamp(18px,2.4vw,28px);
 }
-.cs-brand .cs-brand__was{font:700 14px/1 var(--font-mono);color:var(--muted);text-decoration:line-through}
-.cs-brand__was .micro{margin-right:10px;text-decoration:none;display:inline-block}
-.cs-brand img{width:min(100%,280px);height:auto;padding:0;background:none;box-shadow:none}
+.cs-brand__logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(20px,4vw,48px)}
+.cs-brand__logos > .ph{font-size:28px;color:var(--muted)}
+.cs-brand__logo{display:grid;justify-items:center;align-content:end;gap:14px}
+.cs-brand__logo .micro{color:var(--muted)}
+.cs-brand img{width:min(100%,240px);height:auto;margin:0;padding:0;background:none;box-shadow:none}
+.cs-brand__logo--old img{width:88px}
 .cs-brand__swatches{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .cs-brand__swatches li{font:700 12px/1 var(--font-mono);padding:28px 10px 8px;min-width:96px;background:linear-gradient(var(--c),var(--c)) top/100% 20px no-repeat;border:1px solid rgba(255,255,255,.14)}
 
