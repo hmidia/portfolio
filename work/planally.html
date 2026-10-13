@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Planally | Ahmad Hamidi</title>
-<meta name="description" content="The dashboard and gated workflows for a multi-team project platform.">
+<meta name="description" content="Refreshing the UI of a gated workflow platform and building its reusable components for Storybook.">
 <meta name="theme-color" content="#0b0b0c">
 <meta name="color-scheme" content="dark">
 
 <meta property="og:title" content="Planally | Ahmad Hamidi">
-<meta property="og:description" content="The dashboard and gated workflows for a multi-team project platform.">
+<meta property="og:description" content="Refreshing the UI of a gated workflow platform and building its reusable components for Storybook.">
 <meta property="og:type" content="article">
 
 <link rel="icon" href="../assets/svg/midi-favicon.svg" type="image/svg+xml">
@@ -47,7 +47,7 @@
     <span class="hero__sentinel" aria-hidden="true"></span>
     <p class="micro">case study</p>
     <h1 class="cs-title" id="cs-title">Planally</h1>
-    <p class="cs-intro">Planally is a workflow platform where teams manage tasks, processes and approvals in one place. The workflows are long, involve several departments, and used to be spread across too many tools. I worked on the web platform end to end, keeping complex processes easy to follow without dumbing them down.</p>
+    <p class="cs-intro">Planally turns business processes into structured workflows: work moves through phases, each with an owner, and a phase can’t start until the one before it is approved. When I joined, it was called RevaEDGE, and the platform worked but the UI looked dated. I helped rebrand it as Planally, brought the UI up to date and turned it into reusable assets for the platform’s Storybook.</p>
     <figure class="cs-logo">
       <img src="../assets/svg/logo-planally.svg" width="232" height="71" alt="Planally logo">
     </figure>
@@ -57,24 +57,60 @@
     <div>
       <p class="micro">role</p>
       <h2>UI/UX Designer</h2>
-      <p>I designed the end-to-end flows and a set of reusable components to keep things consistent as the product grew.</p>
+      <p>One of two designers on the platform. I helped create the Planally logo and colours, refreshed the UI of the dashboard and the gated workflow screens, and prepared the reusable components the team documents in Storybook.</p>
     </div>
     <div>
       <p class="micro">problem</p>
-      <h2>Teams managing workflows often deal with</h2>
+      <h2>When I joined, the UI was</h2>
       <ul class="cs-problem">
-        <li>Too many disconnected tools</li>
-        <li>Lack of visibility across tasks and progress</li>
-        <li>Complex processes that are hard to follow and maintain</li>
+        <li>Visually dated</li>
+        <li>Built screen by screen, without shared components</li>
+        <li>Dense where decisions happen: phases, gates and approvals</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="cs-features cs-usecases reveal" aria-labelledby="usecases-title">
+    <h2 class="cs-features__title" id="usecases-title">Who uses it</h2>
+    <div class="cs-features__grid">
+      <article class="cs-feature">
+        <p><strong>Capital investment</strong>A proposal is drafted, evaluated and approved in phases, with a recorded decision at every gate.</p>
+      </article>
+      <article class="cs-feature">
+        <p><strong>Internal audit</strong>Audit teams track findings and follow-ups through each phase until they’re closed.</p>
+      </article>
+      <article class="cs-feature">
+        <p><strong>New product launches</strong>Each phase hands off to the next team only once the gate before it says go.</p>
+      </article>
+      <article class="cs-feature">
+        <p><strong>Leadership and PMO</strong>One view of every project: what’s moving, what’s stuck and who needs to act.</p>
+      </article>
     </div>
   </section>
 
   <section class="cs-steps" aria-label="What I did">
     <article class="cs-step reveal">
       <div class="cs-step__copy">
-        <h3>Designed the dashboard experience</h3>
-        <p>The dashboard gives a quick read on what’s in progress, what’s stuck and how each project is tracking, so people know where to look first.</p>
+        <h3>Helped rebrand RevaEDGE as Planally</h3>
+        <p>Along with the UI refresh, the product got a new name. I helped design the Planally logo and its colours, then carried them into the refreshed screens so the brand and the product look like one thing.</p>
+      </div>
+      <figure class="cs-shot">
+        <div class="cs-brand">
+          <p class="cs-brand__was"><span class="micro">was</span>RevaEDGE</p>
+          <img src="../assets/svg/logo-planally.svg" width="232" height="71" alt="Planally logo: a blue, red and yellow mark beside the wordmark">
+          <ul class="cs-brand__swatches" aria-label="Planally colours">
+            <li style="--c:#28AAE1">#28AAE1</li>
+            <li style="--c:#EA1F27">#EA1F27</li>
+            <li style="--c:#FDDC0D">#FDDC0D</li>
+          </ul>
+        </div>
+      </figure>
+    </article>
+
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Refreshed the dashboard</h3>
+        <p>The dashboard gives a quick read on what’s in progress, what’s stuck and how each project is tracking, so people know where to look first. It’s built from the same cards, charts and lists as the rest of the platform.</p>
       </div>
       <figure class="cs-shot cs-shot--tall">
         <img src="../assets/img/cases/planally-dashboard.webp" width="1194" height="895" alt="Planally dashboard with My Activity and Total Projects charts, a burndown chart, and recent comments" loading="lazy">
@@ -83,8 +119,8 @@
 
     <article class="cs-step reveal">
       <div class="cs-step__copy">
-        <h3>Designed gated workflow structure</h3>
-        <p>Some steps can only start once the one before is approved. I designed the flow and the UI around those gates, so it’s always clear what’s blocking what, and who needs to act.</p>
+        <h3>Redesigned the gated workflow screens</h3>
+        <p>A phase can only start once the one before is approved. I redesigned the phase tracker, the Go / No Go decision and the pending approvals, so it’s always clear what’s blocking what, and who needs to act.</p>
       </div>
       <figure class="cs-shot">
         <img src="../assets/img/cases/planally-gates.webp" width="1268" height="390" alt="Gated workflow UI: pending approvals, a project phase tracker with a Go / No Go gate decision, and a project list with an add-project form" loading="lazy">
@@ -92,9 +128,27 @@
     </article>
   </section>
 
+  <section class="cs-challenges" aria-labelledby="challenges-title">
+    <h2 class="cs-features__title" id="challenges-title">Challenges</h2>
+    <ol>
+      <li class="cs-challenge reveal">
+        <div class="cs-challenge__q"><p class="micro">the challenge</p><h3>Updating a product people already rely on</h3><p>Teams ran real approvals on Planally every day. A redesign that moved everything around would have made them relearn their own workflows.</p></div>
+        <div class="cs-challenge__a"><p class="micro">what I did</p><p>Kept the flows and structure people knew, and updated the layer they see: type, spacing, colour and components, screen by screen.</p></div>
+      </li>
+      <li class="cs-challenge reveal">
+        <div class="cs-challenge__q"><p class="micro">the challenge</p><h3>A lot to show where decisions happen</h3><p>One project can carry phases, gates, owners, approvals and comments, and they all compete for the same screen.</p></div>
+        <div class="cs-challenge__a"><p class="micro">what I did</p><p>Gave the decision the most weight: the gate reads as a clear Go / No Go, the phase tracker shows where the project stands, and pending approvals sit where the approver will see them first.</p></div>
+      </li>
+      <li class="cs-challenge reveal">
+        <div class="cs-challenge__q"><p class="micro">the challenge</p><h3>Two designers, one product</h3><p>With screens designed one by one, the same button or card could come out a little different each time, and developers rebuilt it again and again.</p></div>
+        <div class="cs-challenge__a"><p class="micro">what I did</p><p>Prepared reusable assets for the platform’s Storybook: components with their states and variants, so both designers and the developers work from the same set.</p></div>
+      </li>
+    </ol>
+  </section>
+
   <section class="cs-outcome reveal" aria-labelledby="outcome-title">
     <h2 class="micro" id="outcome-title">outcome</h2>
-    <p class="cs-outcome__text">Complex workflows now have one place to live: a dashboard for the big picture, and gated steps that make progress easy to follow.</p>
+    <p class="cs-outcome__text">A new name and identity, a refreshed UI that teams didn’t have to relearn, and a shared component set in Storybook that new screens are built from.</p>
   </section>
 
   <nav class="cs-next" aria-label="More work">

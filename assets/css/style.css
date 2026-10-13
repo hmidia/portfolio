@@ -567,6 +567,23 @@ em{font-style:italic}
 .cs-feature img{width:100%;background:#fff}
 .cs-feature figcaption{margin-top:14px;font-size:15px;line-height:1.45;color:var(--paper-muted)}
 .cs-feature strong{display:block;margin-bottom:4px;font:italic 800 19px/1.15 var(--font-display);color:var(--paper-ink)}
+/* rebrand sheet (Planally): old name, new logo, colours */
+.cs-brand{
+  max-width:min(100%,640px);margin-inline:auto;padding:clamp(24px,4vw,48px);
+  /* dark sheet: the logo's wordmark is white */
+  background:#161618;color:var(--ink);rotate:-.6deg;
+  box-shadow:0 30px 50px -24px rgba(0,0,0,.85);
+  display:grid;justify-items:center;gap:clamp(18px,2.4vw,28px);
+}
+.cs-brand .cs-brand__was{font:700 14px/1 var(--font-mono);color:var(--muted);text-decoration:line-through}
+.cs-brand__was .micro{margin-right:10px;text-decoration:none;display:inline-block}
+.cs-brand img{width:min(100%,280px);height:auto;padding:0;background:none;box-shadow:none}
+.cs-brand__swatches{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.cs-brand__swatches li{font:700 12px/1 var(--font-mono);padding:28px 10px 8px;min-width:96px;background:linear-gradient(var(--c),var(--c)) top/100% 20px no-repeat;border:1px solid rgba(255,255,255,.14)}
+
+/* text-only cards (Planally use cases) */
+.cs-usecases .cs-feature{padding:18px 18px 22px}
+.cs-usecases .cs-feature p{font-size:15px;line-height:1.45;color:var(--paper-muted)}
 
 /* ── creative works (archive page) ── */
 .cw-projects{
