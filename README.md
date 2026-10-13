@@ -1,9 +1,9 @@
-# Ahmad Hamidi — portfolio
+# Ahmad Hamidi portfolio
 
 Static site. No build step, no dependencies. Open `index.html` or serve the folder:
 
 ```bash
-python3 -m http.server 8000
+python -m http.server 8000
 ```
 
 ```
@@ -11,73 +11,65 @@ index.html
 assets/
   css/style.css
   js/main.js
-  svg/            ← art (see "Swapping in the real art" below)
+  img/            ← raster exports of the heavy art (see below)
+  svg/            ← logos, sigil, pastworks wordmark, original Figma exports
 ```
 
 ---
 
-## Swapping in the real art
+## Design system
 
-Every SVG in `assets/svg/` is a **placeholder** at the correct dimensions. Export the
-real art from the Figma file and overwrite the file of the same name — nothing else
-needs to change.
+- **Direction:** dark zine / collage. A black table with paper objects on it: a torn sheet (about),
+  projects as folders on a cutting mat (pastworks), masking-tape labels, film grain. Dark only on purpose.
+- **Accent:** one colour, green (`--accent`, `#2fbf5f`), with a deeper `--accent-ink` for use on paper.
+- **Type:** Archivo (bold italic display, extra-wide for the hero words), Geist (body),
+  Space Mono (tape labels), Permanent Marker (one or two handwritten notes per page). Google Fonts.
+- **Icons:** Phosphor (regular weight, from unpkg).
+- **Mark (placeholder):** a brush line portrait with "midi" lettered across the neck.
+  - `assets/svg/midi-mark.svg`: portrait + lettering, used in the hero on a taped paper card.
+  - `assets/svg/midi-word.svg`: lettering only, used in the nav (inverted to paper white by CSS).
+  - `assets/svg/midi-favicon.svg`: lettering on a cream tile.
 
-Figma file: `Midi-PW` → page `Page 1` → the `— v2` frames.
+  To change the mark, overwrite those files with the same names. The source drawing and the
+  export scripts are in `explorations/` (`midi-portrait-a-v3.html`, `export_mark.py`, `export_word.py`).
 
-Select the layer, then **Export → SVG** in the right-hand panel.
+## Artwork
 
-| Figma layer | Node ID | Save as | Size |
-|---|---|---|---|
-| `ahmad` | `9:133` | `wordmark-ahmad.svg` | 1657 × 333 |
-| `hamidi` | `9:117` | `wordmark-hamidi.svg` | 1625 × 321 |
-| `pastworks` | `12:140` | `pastworks.svg` | 444 × 67 |
-| `Group 2` (UI/UX art) | `18:264` | `art-uiux.svg` | 320 × 277 |
-| `Group 3` (star art) | `20:398` | `art-brand.svg` | 320 × 230 |
-| `logo-go-direct 1` | `66:346` | `logo-godirect.svg` | 242 × 103 |
-| `Planally-Logo-Full 1` | `66:410` | `logo-planally.svg` | 232 × 71 |
-| `fb0f502 1` (Betacard) | `66:468` | `logo-betacard.svg` | 228 × 29 |
+The Figma exports of `art-uiux`, `art-brand`, `wordmark-ahmad` and `wordmark-hamidi` are
+~3MB each because they embed a texture bitmap. The page uses 2x WebP renders from
+`assets/img/` instead (~80KB total). If you re-export from Figma, re-render them:
 
-**For `pastworks.svg`, tick "Outline text" when exporting.** The display face is
-Cubao Free, which isn't a web font — outlining it means the heading renders
-correctly for every visitor without shipping a font file.
+```bash
+chrome --headless=new --force-device-scale-factor=2 --default-background-color=00000000 --window-size=1440,335 --screenshot=wordmark-ahmad.png assets/svg/wordmark-ahmad.svg
+```
 
-The dark wave between the work section and the contact band is drawn inline in
-`index.html`, not loaded from a file. It's a clean full-width curve, so it stays
-seamless at any viewport width. Swap it for the Figma swoosh only if you want to.
+then convert the PNG to WebP (any tool, quality ~82).
 
----
+The two wordmarks and `pastworks.svg` are applied as CSS masks, so they take the
+theme's text or accent colour automatically.
 
 ## Motion
 
-One orchestrated load sequence, then interaction-driven effects. The signature
-move is the wordmark: the two words drift in opposite directions as you scroll
-past the hero.
+- On load the "websites / portals / apps / brand visuals" words come into focus one by one,
+  and the portrait card is slapped onto the page
+- After the intro, focus drifts slowly through those words (a rack-focus loop)
+- The portrait card leans toward the pointer (mouse only)
+- Nav gains a frosted surface once you leave the hero, and underlines the section in view
+- Paper prints straighten and lift on hover
+- Tape labels peel up at one corner on hover and press flat on click
+- Project folders open a crack on hover: the front cover lifts and the case study sheet slides out
+- The portrait's eyes follow the cursor anywhere on the page while the hero is on screen. The page
+  loads `midi-mark.svg` inline for this and moves the paths tagged `class="pupil"`; a mark without
+  them just stays a plain image
+- The footer wordmark's two words drift apart as it scrolls through (CSS scroll-driven
+  animation; browsers without support show it static)
 
-- Headline lines clip-reveal on load, staggered
-- Nav condenses and gains a shadow once you leave the hero
-- Cards lift and their art scales on hover
-- Project cards shift their border to blue and slide the arrow
-- Contact underline draws itself the first time it enters view
-
-**Accessibility.** Every hidden start state is scoped to `html.js`, so the page is
-fully readable if JavaScript fails or is blocked. All motion is disabled under
-`prefers-reduced-motion: reduce` — no transforms, no parallax, opacity only.
-
----
-
-## One thing to check
-
-The contact address is set to **`midi.shaharuddin@gmail.com`**.
-
-The Figma file reads `midi.shaharudding@gmail.com` — with a doubled "d". Since this
-is now a live `mailto:` link rather than a static mockup, it's set to the spelling
-that matches your account. If the Figma spelling was right after all, change it in
-two places in `index.html`: the `href` and the link text.
-
----
+No scroll listeners: everything uses IntersectionObserver or CSS scroll timelines.
+Hidden start states are scoped to `html.js`, so the page reads fine without JavaScript, and
+all motion is switched off under `prefers-reduced-motion: reduce`.
 
 ## Case studies
 
-The three project cards link to `#` for now. Clicking one shows "case study coming
-soon" rather than failing silently. The case study pages exist as Figma frames
-(`Go Direct — v2`, `Planally — v2`, `Betacard — v2`) and can be built next.
+`work/godirect.html`, `work/planally.html` and `work/betacard.html`, built from the Figma
+`— v2` frames. Project screens live in `assets/img/cases/`. They were cropped from 1x exports,
+so re-export them at 2x from Figma when you can and overwrite the files of the same name.

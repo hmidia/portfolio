@@ -1,42 +1,77 @@
-/* Ahmad Hamidi — portfolio interactions
+/* Ahmad Hamidi portfolio interactions
    Motion is additive: every effect here has a static fallback in CSS,
-   and all of it is skipped when the visitor asks for reduced motion. */
+   and all of it is skipped when the visitor asks for reduced motion.
+   No scroll listeners: observers and CSS scroll timelines only. */
 
 (function () {
   'use strict';
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var hasIO = 'IntersectionObserver' in window;
 
   /* ---------- 1. load sequence ---------- */
-  var lines = document.querySelectorAll('.hero__head .line > span');
-  lines.forEach(function (el, i) {
-    el.style.setProperty('--delay', (i * 110) + 'ms');
+  // the made-things words come into focus one after another, then "click."
+  var words = document.querySelectorAll('.blur-word, .hero__click');
+  words.forEach(function (el, i) {
+    el.style.setProperty('--delay', (500 + i * 160) + 'ms');
+    el.style.setProperty('--i', i);
   });
-
   requestAnimationFrame(function () {
     requestAnimationFrame(function () {
       document.body.classList.add('is-ready');
+      // once the intro has landed, hand the words over to the slow rack-focus loop
+      if (words.length) {
+        setTimeout(function () { document.body.classList.add('is-settled'); }, 500 + words.length * 160 + 1400);
+      }
     });
   });
 
-  /* ---------- 2. nav condenses once you leave the hero ---------- */
-  var nav = document.getElementById('nav');
-  var onScrollNav = function () {
-    nav.classList.toggle('is-stuck', window.scrollY > 80);
-  };
-  onScrollNav();
+  /* ---------- 2. bar gains a surface once the hero top leaves view ---------- */
+  var bar = document.getElementById('bar');
+  var sentinel = document.querySelector('.hero__sentinel');
+  if (bar && sentinel && hasIO) {
+    new IntersectionObserver(function (entries) {
+      bar.classList.toggle('is-stuck', !entries[0].isIntersecting);
+    }).observe(sentinel);
+  }
 
-  /* ---------- 3. scroll reveals ---------- */
+  /* ---------- 3. mark the nav link for the section in view ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.bar__links a'));
+  if (hasIO && links.length) {
+    var byId = {};
+    links.forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (href.charAt(0) === '#') byId[href.slice(1)] = a;
+    });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var link = byId[entry.target.id];
+        if (!link) return;
+        if (entry.isIntersecting) {
+          links.forEach(function (a) { a.removeAttribute('aria-current'); });
+          link.setAttribute('aria-current', 'true');
+        } else if (link.getAttribute('aria-current')) {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(byId).forEach(function (id) {
+      var section = document.getElementById(id);
+      if (section) spy.observe(section);
+    });
+  }
+
+  /* ---------- 4. scroll reveals ---------- */
   var reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !reduced.matches) {
+  if (hasIO && !reduced.matches) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var siblings = Array.prototype.slice.call(
-          entry.target.parentNode.querySelectorAll('.reveal')
+          entry.target.parentNode.querySelectorAll(':scope > .reveal')
         );
         var idx = Math.max(0, siblings.indexOf(entry.target));
-        entry.target.style.setProperty('--delay', Math.min(idx, 3) * 110 + 'ms');
+        entry.target.style.setProperty('--delay', Math.min(idx, 3) * 100 + 'ms');
         entry.target.classList.add('in');
         io.unobserve(entry.target);
       });
@@ -47,79 +82,118 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* contact underline draws itself the first time it is seen */
-  var mail = document.querySelector('.contact__mail');
-  if (mail && 'IntersectionObserver' in window) {
-    var mio = new IntersectionObserver(function (e) {
-      if (e[0].isIntersecting) { mail.classList.add('in'); mio.disconnect(); }
-    }, { threshold: 0.5 });
-    mio.observe(mail);
-  }
+  /* ---------- 5. the portrait card leans toward the pointer, and its eyes follow it ---------- */
+  var hero = document.querySelector('.hero');
+  var card = document.querySelector('.hero__mark');
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  if (hero && card) {
+    var frame = 0, px = 0, py = 0;           // pointer within the hero, -1 .. 1
+    var cx = null, cy = null;                // pointer in page coordinates, for the eyes
+    var heroVisible = true;
+    var markSvg = null, pupils = [];
 
-  /* ---------- 4. the signature move: the wordmark drifts as you scroll ---------- */
-  var brushes = Array.prototype.slice.call(document.querySelectorAll('.brush'));
-  var hero = document.querySelector('.hero__brush');
-  var ticking = false;
-  var parallaxOn = false;
+    var apply = function () {
+      frame = 0;
+      card.style.setProperty('--rx', (px * 10).toFixed(2) + 'deg');
+      card.style.setProperty('--ry', (py * -8).toFixed(2) + 'deg');
+      lookAt();
+    };
+    var queue = function () { if (!frame) frame = requestAnimationFrame(apply); };
 
-  function drift() {
-    ticking = false;
-    if (!hero) return;
-    var rect = hero.getBoundingClientRect();
-    var vh = window.innerHeight || 1;
-    // 0 when the band first enters the viewport, 1 once it has fully passed
-    var p = (vh - rect.top) / (vh + rect.height);
-    p = Math.max(0, Math.min(1, p));
-    var shift = (p - 0.5) * 2; // -1 .. 1
-    brushes.forEach(function (b) {
-      var speed = parseFloat(b.getAttribute('data-speed')) || 0;
-      b.style.transform = 'translate3d(' + (shift * speed).toFixed(2) + 'px,0,0)';
+    // Move each pupil a few units toward the pointer, in the drawing's own coordinates.
+    var lookAt = function () {
+      if (!markSvg || !pupils.length) return;
+      var vb = markSvg.viewBox.baseVal;
+      var r = markSvg.getBoundingClientRect();
+      pupils.forEach(function (p) {
+        var ux = 0, uy = 0;
+        if (cx !== null && r.width) {
+          var sx = vb.x + (cx - r.left) / r.width * vb.width;
+          var sy = vb.y + (cy - r.top) / r.height * vb.height;
+          var dx = sx - p.cx, dy = sy - p.cy;
+          var dist = Math.hypot(dx, dy) || 1;
+          var reach = Math.min(1, dist / 260);   // close to the face = small glance, far = full look
+          ux = dx / dist * 7 * reach;
+          uy = Math.max(-2, Math.min(3, dy / dist * 3.5 * reach));
+        }
+        p.el.style.transform = 'translate(' + ux.toFixed(2) + 'px,' + uy.toFixed(2) + 'px)';
+      });
+    };
+
+    hero.addEventListener('pointermove', function (ev) {
+      if (reduced.matches || !finePointer.matches) return;
+      var r = hero.getBoundingClientRect();
+      px = ((ev.clientX - r.left) / r.width - 0.5) * 2;
+      py = ((ev.clientY - r.top) / r.height - 0.5) * 2;
+      queue();
     });
-  }
+    hero.addEventListener('pointerleave', function () { px = 0; py = 0; queue(); });
 
-  function queueDrift() {
-    if (!ticking) { ticking = true; requestAnimationFrame(drift); }
-  }
+    // the eyes keep following anywhere on the page while the hero is on screen
+    document.addEventListener('pointermove', function (ev) {
+      if (reduced.matches || !finePointer.matches || !heroVisible) return;
+      cx = ev.clientX; cy = ev.clientY;
+      queue();
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function () { cx = cy = null; queue(); });
+    if (hasIO) {
+      new IntersectionObserver(function (e) { heroVisible = e[0].isIntersecting; }).observe(hero);
+    }
 
-  function onScroll() {
-    onScrollNav();
-    if (parallaxOn) queueDrift();
-  }
-
-  function applyMotionPreference() {
-    parallaxOn = !reduced.matches;
-    if (!parallaxOn) {
-      brushes.forEach(function (b) { b.style.transform = ''; });
-    } else {
-      queueDrift();
+    // Swap the <img> for the same SVG inline so the pupils can move. Any mark file
+    // without class="pupil" paths simply stays a plain image.
+    var img = card.querySelector('img');
+    if (img && window.fetch && window.DOMParser && !reduced.matches && finePointer.matches) {
+      fetch(img.getAttribute('src'))
+        .then(function (res) { return res.ok ? res.text() : Promise.reject(); })
+        .then(function (text) {
+          var doc = new DOMParser().parseFromString(text, 'image/svg+xml');
+          var svg = doc.documentElement;
+          if (svg.nodeName !== 'svg' || !svg.querySelector('.pupil')) return;
+          svg = document.importNode(svg, true);
+          svg.setAttribute('role', 'img');
+          svg.setAttribute('aria-label', img.getAttribute('alt') || '');
+          img.replaceWith(svg);
+          markSvg = svg;
+          pupils = Array.prototype.map.call(svg.querySelectorAll('.pupil'), function (el) {
+            var b = el.getBBox();
+            return { el: el, cx: b.x + b.width / 2, cy: b.y };   // y: the flat top sits on the eye line
+          });
+          lookAt();
+        })
+        .catch(function () { /* keep the plain image */ });
     }
   }
 
-  applyMotionPreference();
-  if (reduced.addEventListener) {
-    reduced.addEventListener('change', applyMotionPreference);
-  } else if (reduced.addListener) {
-    reduced.addListener(applyMotionPreference);
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () {
-    if (parallaxOn) queueDrift();
-  }, { passive: true });
-
-  /* ---------- 5. case study links aren't built yet — say so honestly ---------- */
-  document.querySelectorAll('.proj[href="#"]').forEach(function (card) {
-    card.addEventListener('click', function (ev) {
-      ev.preventDefault();
-      var link = card.querySelector('.proj__link');
-      if (!link || link.dataset.busy) return;
-      var original = link.innerHTML;
-      link.dataset.busy = '1';
-      link.textContent = 'case study coming soon';
-      setTimeout(function () {
-        link.innerHTML = original;
-        delete link.dataset.busy;
-      }, 1800);
+  /* ---------- 6. copy email ---------- */
+  var copyBtn = document.querySelector('.copy');
+  var status = document.querySelector('.copy__status');
+  if (copyBtn) {
+    var label = copyBtn.querySelector('.copy__label');
+    var icon = copyBtn.querySelector('i');
+    var timer = 0;
+    var settle = function (ok) {
+      copyBtn.classList.toggle('is-done', ok);
+      label.textContent = ok ? 'copied' : 'copy email';
+      icon.className = ok ? 'ph ph-check' : 'ph ph-copy';
+      status.textContent = ok
+        ? 'Email address copied to your clipboard.'
+        : 'Couldn’t copy automatically. Select the address above to copy it.';
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        copyBtn.classList.remove('is-done');
+        label.textContent = 'copy email';
+        icon.className = 'ph ph-copy';
+        status.textContent = '';
+      }, 2400);
+    };
+    copyBtn.addEventListener('click', function () {
+      var text = copyBtn.getAttribute('data-copy');
+      if (!navigator.clipboard) { settle(false); return; }
+      navigator.clipboard.writeText(text).then(
+        function () { settle(true); },
+        function () { settle(false); }
+      );
     });
-  });
+  }
 })();

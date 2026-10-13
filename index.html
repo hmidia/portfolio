@@ -3,17 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ahmad Hamidi — UI/UX &amp; Creative</title>
+<title>Ahmad Hamidi | UI/UX &amp; Creative</title>
 <meta name="description" content="Websites, portals, apps, and brand visuals that actually work. UI/UX and creative direction by Ahmad Hamidi.">
-<meta name="theme-color" content="#0a0912">
+<meta name="theme-color" content="#0b0b0c">
+<meta name="color-scheme" content="dark">
 
-<meta property="og:title" content="Ahmad Hamidi — UI/UX &amp; Creative">
+<meta property="og:title" content="Ahmad Hamidi | UI/UX &amp; Creative">
 <meta property="og:description" content="Websites, portals, apps, and brand visuals that actually work… most of the time.">
 <meta property="og:type" content="website">
 
+<link rel="icon" href="assets/svg/midi-favicon.svg" type="image/svg+xml">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Space+Mono:wght@400;700&family=Permanent+Marker&family=Geist:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <!-- Hidden-until-revealed states apply only when JS is present, so the page
      is fully readable if the script fails or is blocked. -->
@@ -23,149 +27,173 @@
 
 <a class="skip" href="#work">Skip to work</a>
 
-<!-- ─────────────── nav ─────────────── -->
-<nav class="nav" id="nav" aria-label="Main">
-  <div class="nav__pill">
-    <a class="nav__mark" href="#top" aria-label="Ahmad Hamidi — home">
-      <span class="nav__dot" aria-hidden="true"></span>midi
+<!-- ─────────────── bar ─────────────── -->
+<header class="bar" id="bar">
+  <nav class="bar__inner" aria-label="Main">
+    <a class="bar__mark" href="#top" aria-label="Ahmad Hamidi, home">
+      <img src="assets/svg/midi-word.svg" alt="" width="64" height="33">
     </a>
-    <div class="nav__links">
+    <div class="bar__links">
       <a href="#work">pastworks</a>
       <a href="#about">about</a>
-      <a class="nav__cta" href="#contact">contact</a>
+      <a href="#contact">contact</a>
     </div>
-  </div>
-</nav>
-
-<!-- ─────────────── hero ─────────────── -->
-<header class="hero" id="top">
-  <div class="hero__inner">
-    <h1 class="hero__head">
-      <span class="line"><span>Making stuff</span></span>
-      <span class="line"><span>that clicks</span></span>
-    </h1>
-
-    <div class="hero__intro">
-      <p class="hero__tag">Websites, portals, apps, and brand visuals that actually work… <em>most of the time.</em></p>
-      <a class="btn" href="#work">
-        <span class="btn__label">see my work</span>
-        <span class="btn__fill" aria-hidden="true"></span>
-      </a>
-    </div>
-  </div>
-
-  <div class="hero__brush" aria-hidden="true">
-    <img class="brush brush--a" data-speed="-40" src="assets/svg/wordmark-ahmad.svg" alt="">
-    <img class="brush brush--b" data-speed="40"  src="assets/svg/wordmark-hamidi.svg" alt="">
-  </div>
+  </nav>
 </header>
 
-<!-- ─────────────── what i do ─────────────── -->
-<section class="services" id="about" aria-label="What I do">
-  <div class="services__grid">
+<main>
 
-    <article class="card card--dark card--a reveal">
-      <div class="card__art">
-        <img src="assets/svg/art-uiux.svg" alt="" aria-hidden="true">
-      </div>
-      <div class="card__copy">
-        <h2>UI/UX</h2>
-        <p>Interfaces and design system designed to be intuitive, usable, and human-friendly.</p>
-      </div>
-    </article>
+<!-- ─────────────── hero ─────────────── -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <span class="hero__sentinel" aria-hidden="true"></span>
 
-    <article class="card card--b reveal">
-      <div class="card__copy">
-        <h2>Creative&nbsp;/ Branding</h2>
-        <p>Visual identities, brand systems, and creative direction that give brands a voice and personality.</p>
-      </div>
-      <div class="card__art card__art--bleed">
-        <img src="assets/svg/art-brand.svg" alt="" aria-hidden="true">
-      </div>
-    </article>
+  <h1 class="hero__head" id="hero-title">
+    <span class="sr">Ahmad Hamidi (midi), a designer making stuff that clicks: websites, portals, apps, and brand visuals.</span>
+    <span class="micro" aria-hidden="true">ahmad hamidi is a designer</span>
+    <span class="micro" aria-hidden="true">,who makes</span>
+    <span class="hero__words" aria-hidden="true">
+      <span class="blur-word">websites</span>
+      <span class="blur-word">portals</span>
+      <span class="blur-word">apps</span>
+      <span class="blur-word">brand visuals</span>
+    </span>
+    <span class="hero__click" aria-hidden="true"><span class="micro">that</span> <span class="marker">click.</span></span>
+  </h1>
 
-    <article class="card card--c reveal">
-      <div class="card__copy">
-        <p>Started in creative and branding at agencies, then moved into UI/UX for corporate projects.</p>
-        <p>Balancing creativity, usability, and clarity across interfaces and brands.</p>
-        <p class="card__aside"><em>Along the years i have picked</em></p>
-        <ul class="pills">
+  <p class="hero__tag">They actually work… <em>most of the time.</em></p>
+
+  <!-- placeholder mark: replace assets/svg/midi-mark.svg to update it everywhere -->
+  <figure class="hero__mark">
+    <img src="assets/svg/midi-mark.svg" width="403" height="655"
+         alt="midi: a brush line portrait of Ahmad Hamidi with the word midi lettered across the neck">
+  </figure>
+
+  <p class="hero__roles" aria-label="Roles">
+    <span>UI/UX Designer</span>
+    <span class="hero__amp" aria-hidden="true">&amp;</span>
+    <span>Creative</span>
+  </p>
+
+  <a class="tape hero__cta" href="#work">see my pastworks <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+</section>
+
+<!-- ─────────────── about ─────────────── -->
+<section class="about" id="about" aria-labelledby="about-title">
+  <div class="paper reveal">
+    <h2 class="paper__title" id="about-title">
+      Balancing creativity, usability, and clarity <span class="marker">across interfaces and brands.</span>
+    </h2>
+
+    <div class="paper__grid">
+      <figure class="print print--a">
+        <img src="assets/img/art-uiux.webp" width="320" height="277" alt="" loading="lazy">
+        <figcaption>
+          <strong>UI/UX</strong>
+          Interfaces and design systems built to be intuitive, usable, and human-friendly.
+        </figcaption>
+      </figure>
+
+      <figure class="print print--b">
+        <img src="assets/img/art-brand.webp" width="320" height="230" alt="" loading="lazy">
+        <figcaption>
+          <strong>Creative / Branding</strong>
+          Visual identities, brand systems, and creative direction that give brands a voice and personality.
+        </figcaption>
+      </figure>
+
+      <div class="paper__story">
+        <p class="paper__lede">Started in creative and branding at agencies, then moved into UI/UX for corporate projects.</p>
+        <p class="paper__aside">Along the way I’ve picked up</p>
+        <ul class="labels">
           <li>wireframing</li>
-          <li>motion-graphic</li>
+          <li>motion graphics</li>
           <li>prototyping</li>
-          <li>interaction-design</li>
+          <li>interaction design</li>
           <li>user research</li>
         </ul>
       </div>
-    </article>
-
+    </div>
   </div>
 </section>
 
 <!-- ─────────────── pastworks ─────────────── -->
-<section class="work" id="work" aria-label="Past work">
-  <div class="work__head reveal">
-    <h2 class="work__title">
-      <img src="assets/svg/pastworks.svg" alt="pastworks">
-    </h2>
-    <p class="work__sub">A selection of projects that represent my work.</p>
-  </div>
+<section class="work" id="work" aria-labelledby="work-title">
+  <div class="work__inner">
+    <div class="work__head reveal">
+      <h2 class="work__title" id="work-title">
+        <span class="work__word" aria-hidden="true"></span>
+        <span class="sr">pastworks</span>
+      </h2>
+      <p class="work__sub">A selection of projects that represent my work.</p>
+      <p class="marker work__note" aria-hidden="true">click to open <i class="ph ph-arrow-bend-right-down"></i></p>
+    </div>
 
-  <div class="work__grid">
+    <div class="work__table">
+      <article class="folder folder--1 reveal">
+        <a class="folder__link" href="work/godirect.html">
+          <span class="folder__tab micro">case study</span>
+          <span class="folder__panel folder__panel--light">
+            <img src="assets/svg/logo-godirect.svg" width="242" height="103" alt="" loading="lazy">
+          </span>
+          <span class="folder__title">Takaful IKHLAS Go&nbsp;Direct</span>
+          <span class="folder__desc">Designing a data-informed, self-service takaful experience with clearer flows, pricing, and product consistency.</span>
+          <span class="folder__open">open <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+        </a>
+      </article>
 
-    <a class="proj proj--featured reveal" href="#" aria-label="Takaful IKHLAS Go Direct case study">
-      <div class="proj__panel">
-        <img src="assets/svg/logo-godirect.svg" alt="Takaful IKHLAS Go Direct">
-      </div>
-      <div class="proj__copy">
-        <h3>Takaful IKHLAS<br>Go Direct</h3>
-        <p>Designing a data-informed, self-service takaful experience with clearer flows, pricing, and product consistency.</p>
-        <span class="proj__link">view case study <span class="proj__arrow" aria-hidden="true">→</span></span>
-      </div>
-    </a>
+      <article class="folder folder--2 reveal">
+        <a class="folder__link" href="work/planally.html">
+          <span class="folder__tab micro">case study</span>
+          <span class="folder__panel">
+            <img src="assets/svg/logo-planally.svg" width="232" height="71" alt="" loading="lazy">
+          </span>
+          <span class="folder__title">Planally</span>
+          <span class="folder__desc">Simplifying complex workflows into a scalable, consistent system through clear flows and reusable components.</span>
+          <span class="folder__open">open <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+        </a>
+      </article>
 
-    <a class="proj proj--wide reveal" href="#" aria-label="Planally case study">
-      <div class="proj__panel">
-        <img src="assets/svg/logo-planally.svg" alt="Planally">
-      </div>
-      <div class="proj__copy">
-        <h3>Planally</h3>
-        <p>Simplifying complex workflows into a scalable, consistent system through clear flows and reusable components.</p>
-        <span class="proj__link">view case study <span class="proj__arrow" aria-hidden="true">→</span></span>
-      </div>
-    </a>
-
-    <a class="proj proj--tall reveal" href="#" aria-label="Betacard Mobile App case study">
-      <div class="proj__panel">
-        <img src="assets/svg/logo-betacard.svg" alt="Betacard">
-      </div>
-      <div class="proj__copy">
-        <h3>Betacard<br>Mobile App</h3>
-        <p>Creating a fast, intuitive digital business card experience with simple sharing and reusable UI patterns.</p>
-        <span class="proj__link">view case study <span class="proj__arrow" aria-hidden="true">→</span></span>
-      </div>
-    </a>
-
-  </div>
-
-  <div class="work__wave" aria-hidden="true">
-    <svg viewBox="0 0 1440 240" preserveAspectRatio="none" focusable="false">
-      <path d="M0,96 C240,16 420,8 660,72 C900,136 1100,184 1440,120 L1440,240 L0,240 Z"></path>
-    </svg>
+      <article class="folder folder--3 reveal">
+        <a class="folder__link" href="work/betacard.html">
+          <span class="folder__tab micro">case study</span>
+          <span class="folder__panel">
+            <img src="assets/svg/logo-betacard.svg" width="228" height="29" alt="" loading="lazy">
+          </span>
+          <span class="folder__title">Betacard Mobile App</span>
+          <span class="folder__desc">Creating a fast, intuitive digital business card experience with simple sharing and reusable UI patterns.</span>
+          <span class="folder__open">open <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+        </a>
+      </article>
+    </div>
   </div>
 </section>
 
 <!-- ─────────────── contact ─────────────── -->
-<section class="contact" id="contact" aria-label="Contact">
-  <p class="contact__lead">Feel free to reach out</p>
-  <a class="contact__mail" href="mailto:midi.shaharuddin@gmail.com">
-    midi.shaharuddin@gmail.com
-    <span class="contact__rule" aria-hidden="true"></span>
-  </a>
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <h2 class="contact__lead reveal" id="contact-title"><span class="micro">feel free to</span> reach out,</h2>
+  <div class="contact__row reveal">
+    <a class="contact__mail" href="mailto:midi.shaharuddin@gmail.com">midi.shaharuddin@gmail.com</a>
+    <button class="tape copy" type="button" data-copy="midi.shaharuddin@gmail.com">
+      <i class="ph ph-copy" aria-hidden="true"></i>
+      <span class="copy__label">copy email</span>
+    </button>
+  </div>
+  <p class="copy__status" role="status" aria-live="polite"></p>
 </section>
 
+</main>
+
+<!-- ─────────────── footer ─────────────── -->
 <footer class="foot">
-  <p>That’s all for now. Thanks for taking the time to go through my work. I’m always exploring and learning, so there will be more to come.</p>
+  <div class="foot__top">
+    <p>That’s all for now. Thanks for taking the time to go through my work. I’m always exploring and learning, so there will be more to come.</p>
+    <a class="foot__up micro" href="#top">back to top <i class="ph ph-arrow-up" aria-hidden="true"></i></a>
+  </div>
+
+  <div class="sign" aria-hidden="true">
+    <span class="sign__word sign__word--a"></span>
+    <span class="sign__word sign__word--b"></span>
+  </div>
 </footer>
 
 <script src="assets/js/main.js" defer></script>
