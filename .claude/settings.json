@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./old portfolio/**)",
+      "Read(./explorations/preview/**)",
+      "Read(./art-brand.svg)",
+      "Read(./art-uiux.svg)",
+      "Read(./wordmark-ahmad.svg)",
+      "Read(./wordmark-hamid.svg)",
+      "Read(./**/*.pdf)"
+    ]
+  }
+}

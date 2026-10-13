@@ -1,0 +1,14 @@
+# Raw Figma exports (~3MB each, embed a texture bitmap). The site uses assets/img/*.webp instead.
+/art-brand.svg
+/art-uiux.svg
+/wordmark-ahmad.svg
+/wordmark-hamid.svg
+
+# Reference material, not part of the site
+/old portfolio/
+/explorations/preview/
+
+# Never commit the resume: the repo is public
+*.pdf
+
+.claude/settings.local.json
