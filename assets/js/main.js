@@ -10,8 +10,8 @@
   var hasIO = 'IntersectionObserver' in window;
 
   /* ---------- 1. load sequence ---------- */
-  // the made-things words come into focus one after another, then "click."
-  var words = document.querySelectorAll('.blur-word, .hero__click');
+  // the made-things words come into focus one after another
+  var words = document.querySelectorAll('.blur-word');
   words.forEach(function (el, i) {
     el.style.setProperty('--delay', (500 + i * 160) + 'ms');
     el.style.setProperty('--i', i);

@@ -22,9 +22,8 @@
   --mat:#15201b;
 
   --font-display:Archivo,system-ui,sans-serif;
-  --font-body:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
   --font-mono:"Space Mono",ui-monospace,monospace;
-  --font-marker:"Permanent Marker","Comic Sans MS",cursive;
 
   --shell:1280px;
   --gutter:clamp(16px,5vw,64px);
@@ -86,7 +85,6 @@ em{font-style:italic}
   font-size:12px;line-height:1.4;letter-spacing:.38em;text-transform:lowercase;
   color:var(--muted);
 }
-.marker{font-family:var(--font-marker);font-weight:400;font-style:normal;letter-spacing:0;color:var(--accent)}
 
 /* torn masking tape with a typewriter label */
 .tape{
@@ -151,39 +149,38 @@ em{font-style:italic}
 .bar__links a:hover::after,.bar__links a[aria-current]::after{transform:scaleX(1);transform-origin:left}
 
 /* ─────────────── hero ─────────────── */
+/* Everything in the hero is sized against the screen height as well as its width,
+   so the whole composition stays above the fold on short laptop screens. */
 .hero{
+  --avail:calc(100svh - var(--bar-h) - 64px);   /* usable height under the bar */
   position:relative;
   width:min(var(--shell),100% - var(--gutter)*2);margin-inline:auto;
-  min-height:min(100dvh,940px);
-  padding:calc(var(--bar-h) + clamp(16px,3vw,40px)) 0 clamp(48px,6vw,80px);
+  min-height:min(100svh,960px);
+  padding:calc(var(--bar-h) + 24px) 0 40px;
   display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr) auto;
-  grid-template-areas:
-    "head  mark  roles"
-    "tag   cta   roles";
-  column-gap:clamp(16px,3vw,48px);
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  grid-template-areas:"copy mark";
+  column-gap:clamp(24px,4vw,64px);
   align-items:center;
 }
 .hero__sentinel{position:absolute;top:8px;left:0;width:1px;height:1px}
 
-.hero__head{grid-area:head;align-self:end;display:flex;flex-direction:column;gap:6px}
+.hero__copy{grid-area:copy;display:flex;flex-direction:column;align-items:flex-start}
+.hero__head{display:flex;flex-direction:column;gap:6px}
 .hero__words{display:flex;flex-direction:column}
 .blur-word{
   font-family:var(--font-display);font-weight:800;font-style:normal;
   font-stretch:125%;
-  font-size:clamp(34px,4.4vw,66px);line-height:1.02;letter-spacing:.02em;
-  text-transform:lowercase;color:var(--ink);
+  /* capped so the longest item ("creative visuals") stays on one line beside the card */
+  font-size:clamp(26px,min(4.2vw,calc(var(--avail) * .085)),56px);line-height:1.04;letter-spacing:.02em;
+  color:var(--ink);white-space:nowrap;
 }
-.hero__click{display:flex;align-items:baseline;gap:14px;margin-top:4px}
-.hero__click .marker{font-size:clamp(40px,4.6vw,68px);line-height:1;rotate:-4deg;display:inline-block}
-
-.hero__tag{grid-area:tag;align-self:start;margin-top:22px;font-size:16px;color:var(--muted)}
-.hero__tag em{color:var(--body)}
 
 /* the portrait mark, printed on a card and taped to the page */
 .hero__mark{
   grid-area:mark;justify-self:center;position:relative;
-  width:clamp(220px,25vw,360px);
+  /* the card is ~1.7x taller than wide, so cap its width by the height available */
+  width:clamp(200px,min(25vw,calc(var(--avail) * .56)),360px);
   padding:clamp(18px,2vw,28px) clamp(18px,2vw,28px) clamp(14px,1.6vw,22px);
   background:var(--paper);
   rotate:-4deg;perspective:900px;
@@ -203,16 +200,7 @@ em{font-style:italic}
   box-shadow:0 4px 10px rgba(0,0,0,.25);
 }
 
-.hero__roles{
-  grid-area:roles;align-self:stretch;
-  writing-mode:vertical-rl;
-  display:flex;align-items:center;gap:10px;
-  font:italic 900 clamp(40px,4.4vw,72px)/.9 var(--font-display);
-  letter-spacing:-.02em;color:var(--ink);
-}
-.hero__amp{font-family:var(--font-marker);font-style:normal;font-weight:400;color:var(--accent);font-size:.7em}
-
-.hero__cta{grid-area:cta;justify-self:center;align-self:start;margin-top:18px;rotate:3deg}
+.hero__cta{margin-top:clamp(18px,3.4svh,32px);rotate:-2deg}
 .hero__cta:hover{rotate:0deg}
 
 /* ─────────────── about: a sheet of paper on the table ─────────────── */
@@ -239,10 +227,10 @@ em{font-style:italic}
     linear-gradient(#000,#000) 0 19px/100% calc(100% - 19px) no-repeat;
 }
 .paper__title{
-  max-width:18ch;color:var(--paper-ink);
+  max-width:26ch;color:var(--paper-ink);
   font:italic 800 clamp(32px,4.4vw,60px)/1.02 var(--font-display);letter-spacing:-.03em;
 }
-.paper__title .marker{color:var(--accent-ink);font-size:.86em;line-height:1.1;display:inline-block;rotate:-2deg}
+.paper__title em{display:block;color:var(--accent-ink)}
 .paper__grid{
   margin-top:clamp(36px,5vw,64px);
   display:grid;grid-template-columns:1fr 1fr 1.05fr;
@@ -270,8 +258,8 @@ em{font-style:italic}
 .print:hover{rotate:0deg;translate:0 -6px}
 
 .paper__story{padding-top:8px}
-.paper__lede{font:italic 700 clamp(22px,2vw,27px)/1.25 var(--font-display);color:var(--paper-ink);letter-spacing:-.01em}
-.paper__aside{margin:28px 0 14px;font-family:var(--font-marker);font-size:20px;color:var(--accent-ink);rotate:-2deg}
+.paper__lede{font:italic 700 clamp(20px,1.8vw,25px)/1.28 var(--font-display);color:var(--paper-ink);letter-spacing:-.01em}
+.paper__aside{margin:28px 0 14px;font:italic 600 17px/1.3 var(--font-display);color:var(--accent-ink)}
 .labels{display:flex;flex-wrap:wrap;gap:10px}
 .labels li{
   font:700 12px/1 var(--font-mono);letter-spacing:.04em;
@@ -279,6 +267,9 @@ em{font-style:italic}
 }
 .labels li:nth-child(odd){rotate:-1.5deg}
 .labels li:nth-child(even){rotate:1.2deg}
+/* tools read as a quieter second row: outlined instead of filled */
+.paper__aside--tools{margin-top:22px}
+.labels--tools li{background:transparent;color:var(--paper-ink);box-shadow:inset 0 0 0 1.5px var(--paper-ink)}
 
 /* ─────────────── work: projects on a cutting mat ─────────────── */
 .work{
@@ -304,12 +295,6 @@ em{font-style:italic}
           mask:url(../svg/pastworks.svg) no-repeat center/contain;
 }
 .work__sub{margin-top:16px;color:var(--body)}
-.work__note{
-  position:absolute;right:4%;bottom:-36px;
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:24px;rotate:-6deg;
-}
-.work__note i{font-size:28px}
 
 .work__table{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
@@ -397,7 +382,7 @@ em{font-style:italic}
 .copy__status{min-height:1.6em;margin-top:14px;font-size:15px;color:var(--muted)}
 
 /* ─────────────── footer ─────────────── */
-.foot{content-visibility:auto;contain-intrinsic-size:auto 600px;overflow:hidden;border-top:1px solid var(--line)}
+.foot{overflow:hidden;border-top:1px solid var(--line)}
 .foot__top{
   width:min(var(--shell),100% - var(--gutter)*2);margin-inline:auto;
   display:flex;justify-content:space-between;align-items:flex-end;gap:24px 48px;flex-wrap:wrap;
@@ -408,21 +393,27 @@ em{font-style:italic}
 .foot__up i{letter-spacing:0;transition:transform var(--d-base) var(--e-out)}
 .foot__up:hover i{transform:translateY(-3px)}
 
-/* the brushed wordmark, masked so it takes the theme colours */
-.sign{line-height:0;padding-bottom:clamp(8px,1.4vw,20px)}
-.sign__word{
-  display:block;width:112%;margin-left:-6%;
+/* The brushed wordmark. Each word is a repeating strip (word + gap, masked so it takes
+   the theme colour) inside a clipped row. Hovering loops the strips in opposite directions;
+   leaving pauses them where they are. One tile = 115% of the row width. */
+.sign{line-height:0;padding-bottom:clamp(8px,1.4vw,20px);--tile:115%}
+.sign__row{display:block;overflow:hidden}
+.sign__row--a{aspect-ratio:calc(5.2657 / 1.15)}        /* tile width / height, scaled to the row */
+.sign__row--b{aspect-ratio:calc(5.3847 / 1.15);margin-top:-1.2%}
+.sign__track{
+  display:block;height:100%;
+  width:calc(var(--tile) * 3);margin-left:-22%;
   background:var(--ink);
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-size:100% 100%;mask-size:100% 100%;
+  -webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;
+  -webkit-mask-size:calc(100% / 3) 100%;mask-size:calc(100% / 3) 100%;
+  will-change:transform;
 }
-.sign__word--a{
-  aspect-ratio:1440/335;
-  -webkit-mask-image:url(../img/wordmark-ahmad.webp);mask-image:url(../img/wordmark-ahmad.webp);
+.sign__row--a .sign__track{
+  -webkit-mask-image:url(../img/wordmark-ahmad-loop.webp);mask-image:url(../img/wordmark-ahmad-loop.webp);
 }
-.sign__word--b{
-  aspect-ratio:1440/321;margin-top:-1.2%;background:var(--accent);
-  -webkit-mask-image:url(../img/wordmark-hamidi.webp);mask-image:url(../img/wordmark-hamidi.webp);
+.sign__row--b .sign__track{
+  margin-left:-48%;background:var(--accent);
+  -webkit-mask-image:url(../img/wordmark-hamidi-loop.webp);mask-image:url(../img/wordmark-hamidi-loop.webp);
 }
 
 /* ─────────────── case study pages ─────────────── */
@@ -538,28 +529,26 @@ em{font-style:italic}
 .cs-next__link:hover .cs-next__name i{transform:translateX(10px)}
 
 /* ─────────────── motion ─────────────── */
-.js .hero__head .micro,.js .hero__tag,.js .hero__cta{opacity:0}
-.js .blur-word,.js .hero__click{opacity:0;filter:blur(14px)}
+.js .hero__head .micro,.js .hero__cta{opacity:0}
+.js .blur-word{opacity:0;filter:blur(14px)}
 .js .hero__mark{opacity:0;transform:translateY(-40px) scale(1.08)}
-.js .hero__roles{opacity:0;transform:translateY(30px)}
 
 .is-ready .hero__head .micro{opacity:1;transition:opacity 800ms var(--e-soft) 200ms}
 /* words come into focus one after another */
-.is-ready .blur-word,.is-ready .hero__click{
+.is-ready .blur-word{
   opacity:1;filter:blur(0);
   transition:opacity 900ms var(--e-soft) var(--delay,0ms),filter 1100ms var(--e-out) var(--delay,0ms);
 }
-.is-ready .hero__tag,.is-ready .hero__cta{opacity:1;transition:opacity 700ms var(--e-soft) 1300ms,rotate var(--d-base) var(--e-spring),translate var(--d-base) var(--e-out)}
+.is-ready .hero__cta{opacity:1;transition:opacity 700ms var(--e-soft) 1300ms,rotate var(--d-base) var(--e-spring),translate var(--d-base) var(--e-out)}
 /* the card is slapped onto the page */
 .is-ready .hero__mark{
   opacity:1;transform:none;
   transition:opacity 300ms var(--e-soft) 650ms,transform 700ms var(--e-spring) 650ms;
 }
-.is-ready .hero__roles{opacity:1;transform:none;transition:opacity 800ms var(--e-soft) 300ms,transform 1000ms var(--e-out) 300ms}
 
 /* after the intro, focus drifts through the words like a slow rack-focus */
 @media (prefers-reduced-motion:no-preference){
-  .is-settled .blur-word{animation:rack 9s var(--e-soft) infinite;animation-delay:calc(var(--i) * 2.25s)}
+  .is-settled .blur-word{animation:rack 6.75s var(--e-soft) infinite;animation-delay:calc(var(--i) * 2.25s)}
 }
 @keyframes rack{
   0%,100%{filter:blur(5px);opacity:.38}
@@ -573,26 +562,42 @@ em{font-style:italic}
   transition:opacity 700ms var(--e-soft) var(--delay,0ms),transform 900ms var(--e-out) var(--delay,0ms);
 }
 
-/* signature move: the two words drift apart as the footer scrolls through */
-@supports (animation-timeline:view()){
-  @media (prefers-reduced-motion:no-preference){
-    .sign__word--a{animation:drift-left linear both;animation-timeline:view();animation-range:entry 0% exit 60%}
-    .sign__word--b{animation:drift-right linear both;animation-timeline:view();animation-range:entry 0% exit 60%}
+/* signature move, part 1: hover the wordmark and the two words loop past each other.
+   Touch screens can't hover, so there it just runs, slower. */
+@media (prefers-reduced-motion:no-preference){
+  .sign__row--a .sign__track{animation:loop-left 18s linear infinite paused}
+  .sign__row--b .sign__track{animation:loop-right 18s linear infinite paused}
+  .sign:hover .sign__track{animation-play-state:running}
+  @media (hover:none){
+    .sign__track{animation-play-state:running !important;animation-duration:30s,auto !important}
   }
 }
-@keyframes drift-left{from{transform:translateX(5%)}to{transform:translateX(-4%)}}
-@keyframes drift-right{from{transform:translateX(-5%)}to{transform:translateX(4%)}}
+/* one tile is a third of the strip, so moving a third lands on an identical frame */
+@keyframes loop-left{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+@keyframes loop-right{from{transform:translateX(-33.3333%)}to{transform:translateX(0)}}
+
+/* part 2: the words drift apart as the footer scrolls through (the translate property,
+   so it stacks with the hover loop's transform) */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .sign__row--a .sign__track{animation:loop-left 18s linear infinite paused,drift-left linear both}
+    .sign__row--b .sign__track{animation:loop-right 18s linear infinite paused,drift-right linear both}
+    .sign__row--a .sign__track,.sign__row--b .sign__track{
+      animation-timeline:auto,view();animation-range:normal,entry 0% exit 60%;
+    }
+    .sign:hover .sign__track{animation-play-state:running,running}
+  }
+}
+@keyframes drift-left{from{translate:3% 0}to{translate:-2% 0}}
+@keyframes drift-right{from{translate:-3% 0}to{translate:2% 0}}
 
 /* ─────────────── responsive ─────────────── */
 @media (max-width:1024px){
   .hero{
     grid-template-columns:minmax(0,1fr) minmax(0,.8fr);
-    grid-template-areas:
-      "head    mark"
-      "tag     cta"
-      "roles   roles";
+    grid-template-areas:"copy mark";
+    min-height:0;padding:calc(var(--bar-h) + 48px) 0 clamp(48px,8vw,80px);
   }
-  .hero__roles{writing-mode:horizontal-tb;margin-top:40px;flex-wrap:wrap;font-size:clamp(36px,6vw,56px)}
   .paper__grid{grid-template-columns:1fr 1fr}
   .paper__story{grid-column:1 / -1}
   .work__table{grid-template-columns:1fr 1fr}
@@ -607,19 +612,18 @@ em{font-style:italic}
 
   .hero{
     grid-template-columns:1fr;min-height:0;
-    grid-template-areas:"mark" "head" "tag" "cta" "roles";
+    grid-template-areas:"mark" "copy";
     padding-top:calc(var(--bar-h) + 20px);
   }
   .hero__mark{width:min(60vw,240px);margin:16px 0 40px;justify-self:center;rotate:-4deg}
-  .hero__cta{justify-self:start;margin-top:28px}
-  .hero__roles{margin-top:40px;font-size:clamp(32px,10vw,44px)}
+  /* "creative visuals" is ~10.7em wide here, so 8.2vw keeps it inside the gutters */
+  .blur-word{font-size:clamp(24px,8.2vw,40px)}
 
   .paper{rotate:0deg}
   .paper__grid{grid-template-columns:1fr}
   .print--b{margin-top:8px}
 
-  .work__note{position:static;margin-top:20px}
-  .work__table{grid-template-columns:1fr;gap:56px}
+    .work__table{grid-template-columns:1fr;gap:56px}
   .folder--2,.folder--3{translate:none}
   .folder--3{max-width:none}
 
@@ -627,7 +631,9 @@ em{font-style:italic}
   .cs-logo{justify-self:start;margin-top:40px;width:min(100%,300px)}
   .cs-brief{grid-template-columns:1fr}
 
-  .sign__word{width:130%;margin-left:-15%}
+  .sign{--tile:150%}
+  .sign__row--a{aspect-ratio:calc(5.2657 / 1.5)}
+  .sign__row--b{aspect-ratio:calc(5.3847 / 1.5)}
 }
 
 @media (max-width:560px){
@@ -638,8 +644,8 @@ em{font-style:italic}
 /* ─────────────── reduced motion ─────────────── */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .hero__head .micro,.js .hero__tag,.js .hero__cta,
-  .js .blur-word,.js .hero__click,.js .hero__mark,.js .hero__roles,.js .reveal{
+  .js .hero__head .micro,.js .hero__cta,
+  .js .blur-word,.js .hero__mark,.js .reveal{
     opacity:1 !important;transform:none !important;filter:none !important;
   }
   .hero__mark img,.hero__mark svg,.hero__mark .pupil{transform:none !important}

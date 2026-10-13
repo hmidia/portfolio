@@ -22,8 +22,9 @@ assets/
 - **Direction:** dark zine / collage. A black table with paper objects on it: a torn sheet (about),
   projects as folders on a cutting mat (pastworks), masking-tape labels, film grain. Dark only on purpose.
 - **Accent:** one colour, green (`--accent`, `#2fbf5f`), with a deeper `--accent-ink` for use on paper.
-- **Type:** Archivo (bold italic display, extra-wide for the hero words), Geist (body),
-  Space Mono (tape labels), Permanent Marker (one or two handwritten notes per page). Google Fonts.
+- **Type:** Archivo for everything (bold italic headings, extra-wide hero words, regular body)
+  and Space Mono for tape labels and skill chips. Google Fonts. The brush "midi" lettering is the
+  only handwriting on the site.
 - **Icons:** Phosphor (regular weight, from unpkg).
 - **Mark (placeholder):** a brush line portrait with "midi" lettered across the neck.
   - `assets/svg/midi-mark.svg`: portrait + lettering, used in the hero on a taped paper card.
@@ -37,7 +38,9 @@ assets/
 
 The Figma exports of `art-uiux`, `art-brand`, `wordmark-ahmad` and `wordmark-hamidi` are
 ~3MB each because they embed a texture bitmap. The page uses 2x WebP renders from
-`assets/img/` instead (~80KB total). If you re-export from Figma, re-render them:
+`assets/img/` instead. The footer uses `wordmark-*-loop.webp`: each word rendered in full
+(uncropped) with a gap after it, so the hover loop can repeat it seamlessly. If you re-export
+from Figma, re-render them:
 
 ```bash
 chrome --headless=new --force-device-scale-factor=2 --default-background-color=00000000 --window-size=1440,335 --screenshot=wordmark-ahmad.png assets/svg/wordmark-ahmad.svg
@@ -50,8 +53,8 @@ theme's text or accent colour automatically.
 
 ## Motion
 
-- On load the "websites / portals / apps / brand visuals" words come into focus one by one,
-  and the portrait card is slapped onto the page
+- On load the "Design Systems / Brand Assets / Creative Visuals" words come into focus one by
+  one, and the portrait card is slapped onto the page
 - After the intro, focus drifts slowly through those words (a rack-focus loop)
 - The portrait card leans toward the pointer (mouse only)
 - Nav gains a frosted surface once you leave the hero, and underlines the section in view
@@ -61,7 +64,9 @@ theme's text or accent colour automatically.
 - The portrait's eyes follow the cursor anywhere on the page while the hero is on screen. The page
   loads `midi-mark.svg` inline for this and moves the paths tagged `class="pupil"`; a mark without
   them just stays a plain image
-- The footer wordmark's two words drift apart as it scrolls through (CSS scroll-driven
+- Hovering the footer wordmark loops AHMAD left and HAMIDI right; leaving pauses them in place.
+  Touch screens run the loop slowly on their own
+- The footer wordmark's two words also drift apart as it scrolls through (CSS scroll-driven
   animation; browsers without support show it static)
 
 No scroll listeners: everything uses IntersectionObserver or CSS scroll timelines.
