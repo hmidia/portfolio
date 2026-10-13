@@ -69,7 +69,13 @@ theme's text or accent colour automatically.
 - The footer wordmark's two words also drift apart as it scrolls through (CSS scroll-driven
   animation; browsers without support show it static)
 
-No scroll listeners: everything uses IntersectionObserver or CSS scroll timelines.
+- On phones and tablets (900px and below), project pages get a floating bar at the bottom:
+  previous / current project (opens a list of all projects) / next. It shows on load, slides
+  away while scrolling down, comes back on scroll up, and hides once "Next project" is on screen
+
+One scroll listener, for that bar (scroll direction can't be observed any other way); it is
+passive and only compares positions and toggles a class. Everything else uses
+IntersectionObserver or CSS scroll timelines.
 Hidden start states are scoped to `html.js`, so the page reads fine without JavaScript, and
 all motion is switched off under `prefers-reduced-motion: reduce`.
 

@@ -629,6 +629,64 @@ em{font-style:italic}
 .cs-credits dt{font:700 12px/1 var(--font-mono);color:var(--muted);text-transform:lowercase}
 .cs-credits dd{margin:6px 0 0;color:var(--ink)}
 
+/* ─────────────── mobile project bar (case pages, phones + tablets) ─────────────── */
+.pnav,.pnav-sheet{display:none}
+@media (max-width:900px){
+  /* room at the bottom so the bar never covers the last of the page */
+  body:has(.pnav){padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+
+  .pnav{
+    position:fixed;z-index:var(--z-bar);left:50%;translate:-50% 0;
+    bottom:calc(14px + env(safe-area-inset-bottom));
+    display:flex;align-items:center;padding:4px;
+    background:var(--paper);color:var(--paper-ink);border-radius:6px;
+    box-shadow:0 18px 40px -12px rgba(0,0,0,.85),0 0 0 1px rgba(21,21,21,.08);
+    transition:transform 220ms var(--e-out),opacity 220ms var(--e-soft);
+  }
+  /* slides out of the way while reading (scrolling down) and near the next-project link */
+  .pnav.is-hidden{transform:translateY(calc(100% + 24px + env(safe-area-inset-bottom)));opacity:0}
+  .pnav__step{
+    width:44px;height:44px;display:grid;place-items:center;border-radius:4px;
+    font-size:20px;color:var(--paper-ink);
+  }
+  .pnav__step:active,.pnav__current:active{background:rgba(21,21,21,.08)}
+  .pnav__current{
+    min-height:44px;padding:0 14px;max-width:52vw;
+    display:inline-flex;align-items:center;gap:6px;
+    border:0;border-inline:1px solid rgba(21,21,21,.14);background:none;cursor:pointer;
+    font:italic 800 16px/1 var(--font-display);color:var(--paper-ink);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .pnav__current i{font-size:14px;flex:none}
+
+  /* the project list: a sheet of paper sliding up from the bottom */
+  .pnav-sheet{
+    display:block;width:100%;max-width:560px;max-height:80dvh;
+    margin:auto auto 0;padding:0;border:0;
+    background:var(--paper);color:var(--paper-ink);border-radius:6px 6px 0 0;
+    box-shadow:0 -20px 60px -20px rgba(0,0,0,.9);
+  }
+  .pnav-sheet:not([open]){display:none}
+  .pnav-sheet[open]{animation:sheet-up 240ms var(--e-out)}
+  .pnav-sheet::backdrop{background:rgba(11,11,12,.7)}
+  .pnav-sheet__inner{position:relative;padding:22px 20px calc(20px + env(safe-area-inset-bottom))}
+  .pnav-sheet .micro{color:var(--paper-muted)}
+  .pnav-sheet ul{margin:10px 0 0;padding:0;list-style:none}
+  .pnav-sheet li a{
+    display:flex;align-items:center;min-height:48px;
+    font:italic 800 22px/1.1 var(--font-display);letter-spacing:-.01em;color:var(--paper-ink);
+    border-bottom:1px solid rgba(21,21,21,.1);
+  }
+  .pnav-sheet li a[aria-current]{color:var(--accent-ink)}
+  .pnav-sheet li a[aria-current]::after{content:"you’re here";margin-left:auto;font:700 11px/1 var(--font-mono);color:var(--paper-muted)}
+  .pnav-sheet__home{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:12px;font:700 13px/1 var(--font-mono);color:var(--paper-ink)}
+  .pnav-sheet__close{
+    position:absolute;top:8px;right:8px;width:44px;height:44px;display:grid;place-items:center;
+    border:0;background:none;color:var(--paper-muted);font-size:20px;cursor:pointer;
+  }
+}
+@keyframes sheet-up{from{transform:translateY(100%)}to{transform:none}}
+
 /* ─────────────── motion ─────────────── */
 .js .hero__head .micro,.js .hero__cta{opacity:0}
 .js .blur-word{opacity:0;filter:blur(14px)}

@@ -196,4 +196,40 @@
       );
     });
   }
+
+  /* ---------- 7. mobile project bar (case pages) ----------
+     Visible on load, slides away while scrolling down, back on scroll up,
+     and hidden once the "next project" link at the end is on screen.
+     Scroll direction needs a scroll listener (passive; browsers fire it at most
+     once per frame), and the work in it is one comparison and a class toggle. */
+  var pnav = document.querySelector('.pnav');
+  var sheet = document.getElementById('pnav-sheet');
+  if (pnav) {
+    var lastY = window.scrollY;
+    var end = document.querySelector('.cs-next');
+    var setHidden = function (hide) {
+      if (sheet && sheet.open) hide = false;
+      pnav.classList.toggle('is-hidden', hide);
+    };
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY, dy = y - lastY;
+      var atEnd = end && end.getBoundingClientRect().top < window.innerHeight;
+      if (atEnd) { setHidden(true); lastY = y; return; }
+      if (Math.abs(dy) < 8) return;                 // ignore tiny jitters
+      setHidden(dy > 0 && y > 120);                 // down hides, up shows; always shown near the top
+      lastY = y;
+    }, { passive: true });
+    // a keyboard user tabbing into the bar should always see it
+    pnav.addEventListener('focusin', function () { pnav.classList.remove('is-hidden'); });
+
+    if (sheet && typeof sheet.showModal === 'function') {
+      var opener = pnav.querySelector('.pnav__current');
+      opener.addEventListener('click', function () { sheet.showModal(); });
+      sheet.querySelectorAll('[data-pnav-close]').forEach(function (b) {
+        b.addEventListener('click', function () { sheet.close(); });
+      });
+      sheet.addEventListener('click', function (ev) { if (ev.target === sheet) sheet.close(); });
+      sheet.addEventListener('close', function () { opener.focus(); });
+    }
+  }
 })();

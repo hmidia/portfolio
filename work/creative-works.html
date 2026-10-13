@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Creative Works | Ahmad Hamidi</title>
 <meta name="description" content="Brand identities, event visuals and illustration by Ahmad Hamidi.">
 <meta name="theme-color" content="#0b0b0c">
@@ -128,6 +128,26 @@
     <a class="foot__up micro" href="#content">back to top <i class="ph ph-arrow-up" aria-hidden="true"></i></a>
   </div>
 </footer>
+
+<nav class="pnav" aria-label="Projects">
+  <a class="pnav__step" href="betacard.html" aria-label="Previous project: Betacard"><i class="ph ph-arrow-left" aria-hidden="true"></i></a>
+  <button class="pnav__current" type="button" aria-haspopup="dialog" aria-controls="pnav-sheet">Creative Works <i class="ph ph-caret-up" aria-hidden="true"></i></button>
+  <a class="pnav__step" href="parserje.html" aria-label="Next project: Parserje"><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+</nav>
+<dialog class="pnav-sheet" id="pnav-sheet" aria-labelledby="pnav-sheet-title">
+  <div class="pnav-sheet__inner">
+    <p class="micro" id="pnav-sheet-title">projects</p>
+    <ul>
+        <li><a href="parserje.html">Parserje</a></li>
+        <li><a href="godirect.html">Go Direct</a></li>
+        <li><a href="planally.html">Planally</a></li>
+        <li><a href="betacard.html">Betacard</a></li>
+        <li><a href="creative-works.html" aria-current="page">Creative Works</a></li>
+    </ul>
+    <a class="pnav-sheet__home" href="../index.html#work"><i class="ph ph-arrow-left" aria-hidden="true"></i> back to home</a>
+    <button class="pnav-sheet__close" type="button" data-pnav-close aria-label="Close project list"><i class="ph ph-x" aria-hidden="true"></i></button>
+  </div>
+</dialog>
 
 <script src="../assets/js/main.js" defer></script>
 </body>
