@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parserje | Ahmad Hamidi</title>
+<meta name="description" content="A Windows and web app that turns bank-statement PDFs into a checked Excel workbook, without uploading anything.">
+<meta name="theme-color" content="#0b0b0c">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:title" content="Parserje | Ahmad Hamidi">
+<meta property="og:description" content="A Windows and web app that turns bank-statement PDFs into a checked Excel workbook, without uploading anything.">
+<meta property="og:type" content="article">
+
+<link rel="icon" href="../assets/svg/midi-favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="bar cs-bar" id="bar">
+  <nav class="bar__inner" aria-label="Case studies">
+    <a class="bar__mark" href="../index.html" aria-label="Ahmad Hamidi, home">
+      <img src="../assets/svg/midi-word.svg" alt="" width="64" height="33">
+    </a>
+    <div class="bar__links">
+      <a href="parserje.html" aria-current="page">Parserje</a>
+      <a href="godirect.html">Go Direct</a>
+      <a href="planally.html">Planally</a>
+      <a href="betacard.html">Betacard</a>
+      <a href="creative-works.html">Creative Works</a>
+      <a class="cs-home" href="../index.html#work"><i class="ph ph-arrow-left" aria-hidden="true"></i>&nbsp;home</a>
+    </div>
+  </nav>
+</header>
+
+<main id="content">
+
+  <section class="cs-hero" aria-labelledby="cs-title">
+    <span class="hero__sentinel" aria-hidden="true"></span>
+    <p class="micro">case study</p>
+    <h1 class="cs-title" id="cs-title">Parserje</h1>
+    <p class="cs-intro">Parserje turns bank-statement PDFs into a clean Excel list of transactions. It runs on your own computer, as a Windows app or in the browser, so statements never get uploaded. I designed it, built it and ran it like a product, from the first screen to the beta.</p>
+    <figure class="cs-logo">
+      <img src="../assets/svg/logo-parserje.svg" width="113" height="28" alt="Parserje logo">
+    </figure>
+  </section>
+
+  <section class="cs-brief reveal" aria-label="Role and problem">
+    <div>
+      <p class="micro">role</p>
+      <h2>Design &amp; Build</h2>
+      <p>I designed the interface and the brand direction (still a work in progress), built the app and its bank readers, and ran the releases: weekly batches, an issue tracker and QA before every release.</p>
+    </div>
+    <div>
+      <p class="micro">problem</p>
+      <h2>Turning a statement into a spreadsheet usually means</h2>
+      <ul class="cs-problem">
+        <li>Retyping every transaction by hand</li>
+        <li>A different layout for every bank</li>
+        <li>Scanned PDFs that copy and paste can’t read</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cs-steps" aria-label="What I did">
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Kept it to one screen</h3>
+        <p>Drop in your PDFs, press Extract Data, get a workbook. No account, no settings page, nothing to learn first.</p>
+      </div>
+      <figure class="cs-shot">
+        <img src="../assets/img/cases/parserje-desktop-landing.webp" width="1512" height="615" alt="Parserje desktop app design: the headline Start with a bank statement beside the company name field and PDF drop zone" loading="lazy">
+      </figure>
+    </article>
+
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Put privacy in the headline</h3>
+        <p>Statements are sensitive, so everything runs on the device. The web version says it up front, Zero Uploads, and it can even convert with the network switched off.</p>
+      </div>
+      <figure class="cs-shot">
+        <img src="../assets/img/cases/parserje-web-landing.webp" width="1440" height="820" alt="Parserje web version landing page: Bank Statements to Excel. Zero Uploads." loading="lazy">
+      </figure>
+    </article>
+
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Built the workbook for checking, not just reading</h3>
+        <p>Totals sit on top, rows Parserje can’t verify are shaded, and one tile filters straight to them. A summary adds monthly cash flow and a statement check when you ask for it.</p>
+      </div>
+      <figure class="cs-shot">
+        <img src="../assets/img/cases/parserje-web-workbook.webp" width="1440" height="820" alt="Parserje workbook preview with sample data: totals, a Needs Checking tile and a transaction table with shaded rows" loading="lazy">
+        <img src="../assets/img/cases/parserje-web-summary.webp" width="1440" height="860" alt="Parserje summary tab with sample data: monthly cash flow and a statement check that matches" loading="lazy">
+      </figure>
+    </article>
+
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Ran it like a product</h3>
+        <p>Weekly batches of at most three fixes, written notes for every release, and independent QA before anything shipped. The web version also went through a full UX audit, with the fixes rolled into the releases that followed.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="cs-challenges" aria-labelledby="challenges-title">
+    <h2 class="cs-features__title" id="challenges-title">Challenges</h2>
+    <ol>
+      <li class="cs-challenge reveal">
+        <div class="cs-challenge__q"><p class="micro">the challenge</p><h3>Every bank prints statements differently</h3><p>Maybank, CIMB, Bank Islam and BSN all lay out their statements their own way, and some statements are scans with no text at all.</p></div>
+        <div class="cs-challenge__a"><p class="micro">what I did</p><p>One reader per bank, kept separate so a fix for one never breaks another. Parserje reads the PDF’s text first and only falls back to OCR for scanned pages.</p></div>
+      </li>
+      <li class="cs-challenge reveal">
+        <div class="cs-challenge__q"><p class="micro">the challenge</p><h3>A wrong result that looked like a success</h3><p>In testing, a Bank Islam statement came back with only a few rows, most of them wrong, and the app still said Extraction Complete.</p></div>
+        <div class="cs-challenge__a"><p class="micro">what I did</p><p>I added a reliability check. Totals are matched against the statement’s own summary, and the running balance is checked from opening to closing. If it doesn’t add up, the result says Extracted With Issues and asks before you download.</p></div>
+        <figure class="cs-shot"><img src="../assets/img/cases/parserje-web-needs.webp" width="1440" height="580" alt="Parserje with sample data, filtered to the two rows that need checking" loading="lazy"></figure>
+      </li>
+      <li class="cs-challenge reveal">
+        <div class="cs-challenge__q"><p class="micro">the challenge</p><h3>Progress that didn’t tell the truth</h3><p>The progress steps ran on a timer instead of the actual work, and a failed run wiped your files and settings.</p></div>
+        <div class="cs-challenge__a"><p class="micro">what I did</p><p>Progress now follows the real extraction, there’s a Cancel button, and your selection survives a failure.</p></div>
+      </li>
+      <li class="cs-challenge reveal">
+        <div class="cs-challenge__q"><p class="micro">the challenge</p><h3>Fitting a wide table on a phone</h3><p>The results table was 820px wide, so on a phone only the date and description showed.</p></div>
+        <div class="cs-challenge__a"><p class="micro">what I did</p><p>Below 640px every row becomes a card with the date and amount on top, and the Needs Checking tile moves to the front of the totals.</p></div>
+        <figure class="cs-shot cs-shot--tall"><img src="../assets/img/cases/parserje-web-mobile.webp" width="390" height="844" alt="Parserje workbook on a phone with sample data: totals as tiles and transactions as cards" loading="lazy"></figure>
+      </li>
+    </ol>
+  </section>
+
+  <section class="cs-outcome reveal" aria-labelledby="outcome-title">
+    <h2 class="micro" id="outcome-title">outcome</h2>
+    <p class="cs-outcome__text">Parserje is in beta on Windows and the web. Statements from four Malaysian banks become a checked, ready-to-use workbook, without ever leaving the device.</p>
+  </section>
+
+  <nav class="cs-next" aria-label="More work">
+    <a class="cs-next__link" href="godirect.html">
+      <span class="micro">next project</span>
+      <span class="cs-next__name">Go Direct <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+    </a>
+    <a class="tape" href="../index.html#work"><i class="ph ph-arrow-left" aria-hidden="true"></i> back to home</a>
+  </nav>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__top">
+    <p>Get in touch: <a class="cs-mail" href="mailto:midi.shaharuddin@gmail.com">midi.shaharuddin@gmail.com</a></p>
+    <a class="foot__up micro" href="#content">back to top <i class="ph ph-arrow-up" aria-hidden="true"></i></a>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

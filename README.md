@@ -75,6 +75,10 @@ all motion is switched off under `prefers-reduced-motion: reduce`.
 
 ## Case studies
 
-`work/godirect.html`, `work/planally.html` and `work/betacard.html`, built from the Figma
-`— v2` frames. Project screens live in `assets/img/cases/`. They were cropped from 1x exports,
-so re-export them at 2x from Figma when you can and overwrite the files of the same name.
+`work/parserje.html`, `work/godirect.html`, `work/planally.html`, `work/betacard.html` and the
+`work/creative-works.html` archive. They are generated from one template, so they share the
+header, nav, footer and the next-project loop (Parserje → Go Direct → Planally → Betacard →
+Creative Works → Parserje). Project screens live in `assets/img/cases/`, branding and
+illustration work in `assets/img/creative/`. Parserje screens use the web version's made-up
+sample workbook, not real statements. The Go Direct and Planally screens were cropped from 1x
+exports, so re-export them at 2x from Figma when you can and overwrite the files of the same name.

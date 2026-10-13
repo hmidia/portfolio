@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Betacard Mobile App | Ahmad Hamidi</title>
-<meta name="description" content="The card editor and templates for a digital business card app.">
+<meta name="description" content="The design system, card editor and templates for a digital business card app.">
 <meta name="theme-color" content="#0b0b0c">
 <meta name="color-scheme" content="dark">
 
 <meta property="og:title" content="Betacard Mobile App | Ahmad Hamidi">
-<meta property="og:description" content="The card editor and templates for a digital business card app.">
+<meta property="og:description" content="The design system, card editor and templates for a digital business card app.">
 <meta property="og:type" content="article">
 
 <link rel="icon" href="../assets/svg/midi-favicon.svg" type="image/svg+xml">
@@ -31,9 +31,11 @@
       <img src="../assets/svg/midi-word.svg" alt="" width="64" height="33">
     </a>
     <div class="bar__links">
+      <a href="parserje.html">Parserje</a>
       <a href="godirect.html">Go Direct</a>
       <a href="planally.html">Planally</a>
       <a href="betacard.html" aria-current="page">Betacard</a>
+      <a href="creative-works.html">Creative Works</a>
       <a class="cs-home" href="../index.html#work"><i class="ph ph-arrow-left" aria-hidden="true"></i>&nbsp;home</a>
     </div>
   </nav>
@@ -45,7 +47,7 @@
     <span class="hero__sentinel" aria-hidden="true"></span>
     <p class="micro">case study</p>
     <h1 class="cs-title" id="cs-title">Betacard<br>Mobile App</h1>
-    <p class="cs-intro">Betacard is a mobile app for creating, sharing and managing digital business cards. You can share by QR, link or nearby, and scan paper cards to keep everything in one place. I worked on the mobile UX, aiming to make swapping contacts feel quick and natural, even mid-conversation.</p>
+    <p class="cs-intro">Betacard is a contact-card app for people and teams. You design a card, share it by QR, link or nearby, keep your details up to date, and scan paper cards into the app. I was one of two UI/UX designers on the project.</p>
     <figure class="cs-logo">
       <img src="../assets/svg/logo-betacard.svg" width="228" height="29" alt="Betacard logo">
     </figure>
@@ -55,7 +57,7 @@
     <div>
       <p class="micro">role</p>
       <h2>UI/UX Designer</h2>
-      <p>I designed the end-to-end flows and the reusable components that keep the app simple and consistent.</p>
+      <p>I built the design system, designed the card editor and most of the templates, and worked hands-on in Unity to tune how the editor’s effects behave.</p>
     </div>
     <div>
       <p class="micro">problem</p>
@@ -71,37 +73,95 @@
   <section class="cs-steps" aria-label="What I did">
     <article class="cs-step reveal">
       <div class="cs-step__copy">
-        <h3>Designed the customization experience</h3>
-        <p>Personalising a card is the heart of the app, so most of my time went here:</p>
-        <ul>
-          <li>Layout structure of customization tools</li>
-          <li>Selection of effects and styles</li>
-          <li>How users preview changes in real time</li>
-        </ul>
-        <p>The goal: plenty of freedom, without a wall of options.</p>
+        <h3>Mapped the path to a first card</h3>
+        <p>From sign-up to a finished card in as few steps as possible, with the option to skip editing and come back later.</p>
       </div>
       <figure class="cs-shot cs-shot--tall">
-        <img src="../assets/img/cases/betacard-customize.webp" width="785" height="890" alt="Betacard card editor on a phone: a card preview with text effect controls, plus name, email, and phone fields and contact icons" loading="lazy">
+        <img src="../assets/img/cases/betacard-flow.webp" width="1189" height="1614" alt="App user flow from the splash screen through sign-up, passcode and card preview to the editor, home, vault, sharing and menu" loading="lazy">
       </figure>
     </article>
 
     <article class="cs-step reveal">
       <div class="cs-step__copy">
-        <h3>Designed card templates</h3>
-        <p>A set of ready-made templates gives people a good-looking starting point, so a professional card takes minutes, not an afternoon.</p>
+        <h3>Built the design system</h3>
+        <p>One system for the whole product: colours, type scale, icons and components, so every screen and template speaks the same language.</p>
       </div>
+      <figure class="cs-shot">
+        <img src="../assets/img/cases/betacard-design-system.webp" width="1400" height="1679" alt="Betacard colour palette and type scale, with Montserrat as the primary typeface and Made Evolve Sans for the product" loading="lazy">
+        <img src="../assets/img/cases/betacard-icons.webp" width="1020" height="490" alt="Betacard icon set in orange and navy" loading="lazy">
+      </figure>
     </article>
+
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Designed the card editor</h3>
+        <p>The editor is the heart of the app. I designed how people build a card: choosing a template, adding images and backgrounds, and styling text with effects like shadow, outline and glow. Plenty of freedom, without a wall of options.</p>
+      </div>
+      <figure class="cs-shot cs-shot--tall">
+        <picture><source srcset="../assets/img/cases/betacard-f-create.webp" media="(prefers-reduced-motion: reduce)"><img src="../assets/img/cases/betacard-editor.webp" width="380" height="676" alt="Screen recording of the Betacard editor: adding an image and a yellow background, then typing a name and styling it with shadow and outline effects" loading="lazy"></picture>
+      </figure>
+    </article>
+
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Tuned the effects in Unity</h3>
+        <p>The editor runs on Unity. The developers set it up; I went in to tune how each effect behaves, setting the minimum and maximum values so shadows, outlines and glows always look right on a card, then tested it until it matched the design.</p>
+      </div>
+      <figure class="cs-shot cs-shot--tall">
+        <img src="../assets/img/cases/betacard-customize.webp" width="785" height="890" alt="Betacard card editor with the effect controls open: opacity, shadow, emboss, curve, outline and glow, with a strength slider" loading="lazy">
+      </figure>
+    </article>
+
+    <article class="cs-step reveal">
+      <div class="cs-step__copy">
+        <h3>Designed most of the templates</h3>
+        <p>Templates give people a good-looking start. I designed most of the set, from bold, image-led cards to clean, minimal ones.</p>
+      </div>
+      <figure class="cs-shot">
+        <img src="../assets/img/cases/betacard-templates.webp" width="905" height="772" alt="Template gallery screens, Themes and My Themes, with cards ranging from image-led to minimal" loading="lazy">
+      </figure>
+    </article>
+  </section>
+
+  <section class="cs-features reveal" aria-labelledby="features-title">
+    <h2 class="cs-features__title" id="features-title">What Betacard does</h2>
+    <div class="cs-features__grid">
+      <figure class="cs-feature">
+        <img src="../assets/img/cases/betacard-f-create.webp" width="420" height="747" alt="" loading="lazy">
+        <figcaption><strong>Create custom cards</strong>Start from a template or a blank card and make it yours.</figcaption>
+      </figure>
+      <figure class="cs-feature">
+        <img src="../assets/img/cases/betacard-f-share.webp" width="420" height="747" alt="" loading="lazy">
+        <figcaption><strong>Share contacts easily</strong>QR, link, messaging or nearby, whatever fits the moment.</figcaption>
+      </figure>
+      <figure class="cs-feature">
+        <img src="../assets/img/cases/betacard-f-details.webp" width="420" height="747" alt="" loading="lazy">
+        <figcaption><strong>Always up-to-date details</strong>Update your details once, and the card you shared stays current.</figcaption>
+      </figure>
+      <figure class="cs-feature">
+        <img src="../assets/img/cases/betacard-f-scan.webp" width="420" height="747" alt="" loading="lazy">
+        <figcaption><strong>Scan paper cards</strong>Point the camera at a paper card and it becomes a contact.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section class="cs-outcome reveal" aria-labelledby="outcome-title">
     <h2 class="micro" id="outcome-title">outcome</h2>
-    <p class="cs-outcome__text">Templates get people started fast, and the editor lets them make the card their own, all inside one simple flow.</p>
+    <p class="cs-outcome__text">The design system, editor and templates became the core of Betacard: people start from a template and make the card their own in a few taps.</p>
+  </section>
+
+  <section class="cs-credits reveal" aria-labelledby="credits-title">
+    <h2 class="micro" id="credits-title">credits</h2>
+    <dl>
+      <div><dt>UI/UX</dt><dd>Jye Miin Loo, Ahmad Hamidi</dd></div>
+      <div><dt>Development</dt><dd>Adri Johari</dd></div>
+    </dl>
   </section>
 
   <nav class="cs-next" aria-label="More work">
-    <a class="cs-next__link" href="godirect.html">
+    <a class="cs-next__link" href="creative-works.html">
       <span class="micro">next project</span>
-      <span class="cs-next__name">Go Direct <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+      <span class="cs-next__name">Creative Works <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
     </a>
     <a class="tape" href="../index.html#work"><i class="ph ph-arrow-left" aria-hidden="true"></i> back to home</a>
   </nav>

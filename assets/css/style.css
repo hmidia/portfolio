@@ -296,11 +296,14 @@ em{font-style:italic}
 }
 .work__sub{margin-top:16px;color:var(--body)}
 
+/* five folders: three on top, two centred underneath */
 .work__table{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));row-gap:clamp(72px,8vw,112px);
   gap:clamp(24px,3vw,44px);align-items:start;
 }
-.folder{position:relative}
+.folder{position:relative;grid-column:span 2}
+.work__table .folder:nth-child(4){grid-column:2 / span 2}
+.work__table .folder:nth-child(5){grid-column:4 / span 2}
 .folder::before,.folder::after{content:"";position:absolute;pointer-events:none}
 /* back cover */
 .folder::before{
@@ -322,6 +325,8 @@ em{font-style:italic}
 .folder--1{rotate:-2.5deg}
 .folder--2{rotate:1.8deg;translate:0 64px}
 .folder--3{rotate:-1deg;translate:0 20px}
+.folder--4{rotate:2deg;translate:0 52px}
+.folder--5{rotate:-1.5deg}
 
 .folder__link{
   position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;
@@ -355,6 +360,13 @@ em{font-style:italic}
 .folder--1 .folder__link:hover{--undo:2.5deg}
 .folder--2 .folder__link:hover{--undo:-1.8deg}
 .folder--3 .folder__link:hover{--undo:1deg}
+.folder--4 .folder__link:hover{--undo:-2deg}
+.folder--5 .folder__link:hover{--undo:1.5deg}
+/* the archive folder shows a small contact sheet instead of one logo */
+.folder__panel--sheet{aspect-ratio:auto;grid-template-columns:1fr 1fr;gap:4px;padding:6px;background:var(--paper-2);box-shadow:inset 0 0 0 1px rgba(21,21,21,.1)}
+/* four 16:10 tiles add up to the same shape as the logo panels */
+.folder__panel--sheet img{width:100%;height:auto;max-height:none;aspect-ratio:16/10;object-fit:cover}
+.folder__link:hover .folder__panel--sheet img{transform:none}
 .folder__link:hover .folder__panel img{transform:scale(1.06)}
 .folder__link:hover .folder__open i{transform:translate(3px,-3px)}
 .folder__link:active{transform:translateY(-8px) rotate(calc(var(--undo,0deg))) scale(.99)}
@@ -528,6 +540,102 @@ em{font-style:italic}
 .cs-next__link:hover .cs-next__name{color:var(--accent)}
 .cs-next__link:hover .cs-next__name i{transform:translateX(10px)}
 
+/* several prints in one shot sit stacked, slightly off-angle from each other */
+/* keep big boards readable without filling the whole screen */
+.cs-shot img{max-width:min(100%,880px)}
+.cs-shot img+img{margin-top:clamp(20px,3vw,36px);rotate:.8deg}
+.cs-shot picture{display:block}
+
+/* what the product does: four phone stills as small prints */
+.cs-features{
+  width:min(var(--shell),100% - var(--gutter)*2);margin-inline:auto;
+  padding:0 0 clamp(72px,9vw,120px);
+}
+.cs-features__title{font:italic 800 clamp(30px,3.6vw,52px)/1.02 var(--font-display);letter-spacing:-.025em}
+.cs-features__grid{
+  margin-top:clamp(28px,3.4vw,44px);
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);
+}
+.cs-feature{background:var(--paper-2);padding:10px 10px 18px;box-shadow:0 24px 40px -22px rgba(0,0,0,.85)}
+.cs-feature:nth-child(odd){rotate:-1.2deg}
+.cs-feature:nth-child(even){rotate:1deg;margin-top:28px}
+.cs-feature img{width:100%;background:#fff}
+.cs-feature figcaption{margin-top:14px;font-size:15px;line-height:1.45;color:var(--paper-muted)}
+.cs-feature strong{display:block;margin-bottom:4px;font:italic 800 19px/1.15 var(--font-display);color:var(--paper-ink)}
+
+/* ── creative works (archive page) ── */
+/* header card: a 2x2 contact sheet instead of a single logo */
+.cs-logo--collage{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px;aspect-ratio:1;
+  background:var(--paper-2);rotate:3deg;
+}
+.cs-logo--collage img{width:100%;height:100%;max-height:none;object-fit:cover}
+
+.cw-projects{
+  width:min(var(--shell),100% - var(--gutter)*2);margin-inline:auto;
+  padding:clamp(48px,6vw,80px) 0 clamp(72px,9vw,120px);
+  border-top:1px solid var(--line);
+  display:grid;gap:clamp(72px,9vw,128px);
+}
+.cw-head{max-width:760px}
+.cw-head h2{font:italic 800 clamp(30px,3.6vw,52px)/1.02 var(--font-display);letter-spacing:-.025em}
+.cw-head p{margin-top:14px;max-width:60ch;font-size:18px;color:var(--body)}
+.cw-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.cw-tags li{font:700 12px/1 var(--font-mono);padding:8px 11px;background:var(--paper);color:var(--paper-ink)}
+.cw-tags li:nth-child(odd){rotate:-1deg}
+.cw-tags li:nth-child(even){rotate:1deg}
+
+/* prints laid out on the cutting mat, masonry-style */
+.cw-gallery{
+  margin-top:clamp(28px,3.4vw,44px);
+  padding:clamp(20px,3.4vw,48px);
+  columns:2;column-gap:clamp(18px,2.6vw,36px);
+  background:
+    linear-gradient(rgba(239,236,228,.10) 1px,transparent 1px) 0 0/96px 96px,
+    linear-gradient(90deg,rgba(239,236,228,.10) 1px,transparent 1px) 0 0/96px 96px,
+    linear-gradient(rgba(239,236,228,.04) 1px,transparent 1px) 0 0/24px 24px,
+    linear-gradient(90deg,rgba(239,236,228,.04) 1px,transparent 1px) 0 0/24px 24px,
+    var(--mat);
+  border-radius:4px;
+}
+.cw-gallery--single{columns:1}
+.cw-gallery--single .cw-print{max-width:420px;margin-inline:auto}
+.cw-print{
+  break-inside:avoid;margin:0 0 clamp(18px,2.6vw,36px);
+  background:var(--paper-2);padding:clamp(6px,.8vw,10px);
+  box-shadow:0 26px 44px -24px rgba(0,0,0,.85);
+  transition:rotate var(--d-base) var(--e-spring),translate var(--d-base) var(--e-out);
+}
+.cw-print:nth-child(4n+1){rotate:-.8deg}
+.cw-print:nth-child(4n+2){rotate:.6deg}
+.cw-print:nth-child(4n+3){rotate:.9deg}
+.cw-print:nth-child(4n){rotate:-.5deg}
+.cw-print:hover{rotate:0deg;translate:0 -4px}
+.cw-print img{width:100%}
+
+/* challenges: the problem on the left, what I did on the right, a screen underneath if there is one */
+.cs-challenges{
+  width:min(var(--shell),100% - var(--gutter)*2);margin-inline:auto;
+  padding:clamp(56px,7vw,96px) 0 clamp(72px,9vw,120px);border-top:1px solid var(--line);
+}
+.cs-challenges ol{margin:clamp(28px,3.4vw,44px) 0 0;padding:0;list-style:none;display:grid;gap:clamp(48px,6vw,80px)}
+.cs-challenge{display:grid;grid-template-columns:1fr 1fr;gap:16px clamp(32px,6vw,96px);align-items:start}
+.cs-challenge h3{margin-top:10px;font:italic 800 clamp(24px,2.6vw,36px)/1.05 var(--font-display);letter-spacing:-.02em}
+.cs-challenge__q p:not(.micro),.cs-challenge__a p:not(.micro){margin-top:12px;max-width:52ch;font-size:17px;color:var(--body)}
+.cs-challenge__a{padding:20px 22px;background:var(--paper);color:var(--paper-ink);rotate:.6deg;box-shadow:0 24px 40px -24px rgba(0,0,0,.85)}
+.cs-challenge__a .micro{color:var(--paper-muted)}
+.cs-challenge__a p:not(.micro){color:var(--paper-ink)}
+.cs-challenge .cs-shot{grid-column:1 / -1;margin-top:8px}
+
+/* team credits */
+.cs-credits{
+  width:min(var(--shell),100% - var(--gutter)*2);margin-inline:auto;
+  padding:0 0 clamp(40px,5vw,64px);
+}
+.cs-credits dl{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:12px 48px}
+.cs-credits dt{font:700 12px/1 var(--font-mono);color:var(--muted);text-transform:lowercase}
+.cs-credits dd{margin:6px 0 0;color:var(--ink)}
+
 /* ─────────────── motion ─────────────── */
 .js .hero__head .micro,.js .hero__cta{opacity:0}
 .js .blur-word{opacity:0;filter:blur(14px)}
@@ -592,6 +700,12 @@ em{font-style:italic}
 @keyframes drift-right{from{translate:-3% 0}to{translate:2% 0}}
 
 /* ─────────────── responsive ─────────────── */
+/* four folders across get cramped below this width, so they go 2 x 2 */
+@media (max-width:1180px){
+  .work__table{grid-template-columns:1fr 1fr;row-gap:clamp(64px,8vw,96px)}
+  .work__table .folder,.work__table .folder:nth-child(4){grid-column:auto}
+  .work__table .folder:nth-child(5){grid-column:1 / -1;max-width:calc(50% - 16px);justify-self:center}
+}
 @media (max-width:1024px){
   .hero{
     grid-template-columns:minmax(0,1fr) minmax(0,.8fr);
@@ -600,8 +714,6 @@ em{font-style:italic}
   }
   .paper__grid{grid-template-columns:1fr 1fr}
   .paper__story{grid-column:1 / -1}
-  .work__table{grid-template-columns:1fr 1fr}
-  .folder--3{grid-column:1 / -1;max-width:calc(50% - 16px);justify-self:center}
 }
 @media (max-width:767px){
   body{font-size:16px}
@@ -624,19 +736,23 @@ em{font-style:italic}
   .print--b{margin-top:8px}
 
     .work__table{grid-template-columns:1fr;gap:56px}
-  .folder--2,.folder--3{translate:none}
-  .folder--3{max-width:none}
+  .folder--2,.folder--3,.folder--4{translate:none}
+  .work__table .folder:nth-child(5){max-width:none}
 
   .cs-hero{grid-template-columns:1fr;grid-template-areas:"eyebrow" "title" "intro" "logo"}
   .cs-logo{justify-self:start;margin-top:40px;width:min(100%,300px)}
   .cs-brief{grid-template-columns:1fr}
+  .cs-features__grid{grid-template-columns:1fr 1fr}
+  .cs-challenge{grid-template-columns:1fr}
+  .cw-gallery{columns:1}
+  .cs-feature:nth-child(even){margin-top:20px}
 
   .sign{--tile:150%}
   .sign__row--a{aspect-ratio:calc(5.2657 / 1.5)}
   .sign__row--b{aspect-ratio:calc(5.3847 / 1.5)}
 }
 
-@media (max-width:560px){
+@media (max-width:900px){
   /* project switching moves to the "next project" link at the bottom of each case page */
   .cs-bar .bar__links a:not(.cs-home){display:none}
 }
