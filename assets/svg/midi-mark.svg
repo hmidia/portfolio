@@ -1,56 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="256 404 403 655">
-<!-- midi mark (placeholder): line portrait of Ahmad Hamidi with "midi" lettering.
-     To replace it, overwrite this file; the site picks it up everywhere. -->
-<defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="244 403 387 589">
+<!-- midi mark (placeholder): brush line portrait of Ahmad Hamidi.
+     Paths with class="pupil" follow the cursor on the site; groups with class="strand"
+     sway in a light breeze. To replace the drawing, overwrite this file; without those
+     classes it simply shows as a still image. -->
+<style>
+  /* each stray strand swings from its root, slowly and out of step with the others */
+  .strand{transform-box:fill-box;animation:breeze 6s ease-in-out infinite}
+  .strand--crown{transform-origin:100% 100%;animation-duration:5.2s}
+  .strand--right{transform-origin:40% 0;animation-duration:6.4s;animation-delay:-1.8s}
+  .strand--left{transform-origin:60% 0;animation-duration:7s;animation-delay:-3.1s;animation-direction:alternate-reverse}
+  @keyframes breeze{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+  @media (prefers-reduced-motion:reduce){.strand{animation:none}}
+</style>
+  <defs>
     <filter id="brush" x="-5%" y="-5%" width="110%" height="110%">
       <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="slow"/>
       <feDisplacementMap in="SourceGraphic" in2="slow" scale="9" xChannelSelector="R" yChannelSelector="G" result="w"/>
       <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="1" seed="9" result="fine"/>
       <feDisplacementMap in="w" in2="fine" scale="5" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-    <!-- wet ink: strokes melt together and pool at joins and ends, then get a light rough edge -->
-    <filter id="ink" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
-      <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.137  0 0 0 0 0.137  0 0 0 0 0.137  0 0 0 26 -11" result="goo"/>
-      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="6" result="slow"/>
-      <feDisplacementMap in="goo" in2="slow" scale="6" xChannelSelector="R" yChannelSelector="G" result="w"/>
-      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="1" seed="11" result="fine"/>
-      <feDisplacementMap in="w" in2="fine" scale="3" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
 
-    <!-- "midi" lettering, drawn upright on a 1060 baseline; slanted where it's used -->
-    <g id="midi">
-      <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
-        <!-- m -->
-        <path stroke-width="34" d="M262 968 C266 995 262 1030 255 1058"/>
-        <path stroke-width="19" d="M262 990 C278 958 308 950 316 975"/>
-        <path stroke-width="32" d="M316 975 C322 1002 315 1034 311 1056"/>
-        <path stroke-width="19" d="M318 994 C334 960 364 952 372 980"/>
-        <path stroke-width="32" d="M372 980 C378 1010 372 1038 380 1054 C386 1066 398 1066 410 1050"/>
-        <!-- i -->
-        <path stroke-width="32" d="M440 975 C443 1000 436 1030 440 1050 C444 1066 457 1066 468 1054"/>
-        <path stroke-width="23" d="M444 928 C448 920 454 912 460 906"/>
-        <!-- d -->
-        <path stroke-width="31" d="M560 990 C542 962 500 962 491 1003 C484 1042 514 1068 543 1046 C558 1034 565 1012 566 990"/>
-        <path stroke-width="32" d="M581 872 C577 922 568 980 567 1028 C566 1058 581 1066 598 1050"/>
-        <!-- i with an accent for a dot -->
-        <path stroke-width="32" d="M622 975 C625 1000 618 1030 622 1050 C626 1066 639 1066 651 1053"/>
-        <path stroke-width="22" d="M630 930 C637 918 645 906 654 895"/>
-      </g>
-      <g fill="#000">
-        <circle cx="256" cy="1059" r="20"/>
-        <circle cx="311" cy="1057" r="19"/>
-        <circle cx="412" cy="1048" r="15"/>
-        <circle cx="470" cy="1052" r="15"/>
-        <circle cx="581" cy="874" r="19"/>
-        <circle cx="600" cy="1048" r="15"/>
-        <circle cx="653" cy="1051" r="15"/>
-        <circle cx="461" cy="905" r="16"/>
-        <circle cx="655" cy="894" r="15"/>
-      </g>
-    </g>
-
-    <!-- portrait A, without the shoulder flick; the neck ends are set per layout -->
     <g id="face">
       <g fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5">
         <path d="M455 428 C430 420 400 424 378 432 C352 440 335 452 318 470 C300 490 285 510 276 535 C266 562 262 592 264 622 C266 652 272 680 284 700 C290 710 296 718 302 724"/>
@@ -60,9 +29,6 @@
         <path d="M456 436 C440 462 410 488 385 510 C365 530 352 560 350 612"/>
         <path d="M448 450 C430 480 410 505 396 540"/>
         <path d="M458 438 C480 462 515 485 537 520 C548 540 553 565 555 600"/>
-        <path d="M378 432 C371 424 362 421 353 423"/>
-        <path d="M592 712 C598 735 596 760 586 780"/>
-        <path d="M290 712 C286 730 290 745 298 758"/>
         <path d="M306 650 C305 700 316 760 340 805 C362 840 398 860 435 862 C470 862 505 845 530 815 C548 790 556 740 558 688"/>
         <path d="M303 690 C289 688 284 705 290 722 C295 735 305 740 312 738"/>
         <path d="M557 688 C572 684 580 700 574 718 C570 732 562 738 552 736"/>
@@ -86,14 +52,17 @@
       </g>
     </g>
   </defs>
-<g filter="url(#brush)">
+  <g filter="url(#brush)">
     <use href="#face"/>
     <g fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5">
-      <path d="M338 818 C340 860 343 905 345 975"/>
-      <path d="M532 812 C530 855 530 900 528 965"/>
+      <!-- neck, finishing in two soft shoulder lines -->
+      <path d="M338 818 C340 858 343 896 345 930"/>
+      <path d="M532 812 C530 852 530 884 528 912"/>
+      <path d="M345 930 C324 948 296 962 266 974"/>
+      <path d="M528 912 C552 928 582 940 610 948"/>
     </g>
   </g>
-  <g transform="translate(440 1030) scale(0.8) translate(-440 -1060) translate(0 1060) skewX(-11) translate(0 -1060) translate(-16 0)" filter="url(#ink)">
-    <use href="#midi"/>
-  </g>
+  <g class="strand strand--crown" filter="url(#brush)"><path fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5" d="M378 432 C371 424 362 421 353 423"/></g>
+  <g class="strand strand--right" filter="url(#brush)"><path fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5" d="M592 712 C598 735 596 760 586 780"/></g>
+  <g class="strand strand--left" filter="url(#brush)"><path fill="none" stroke="#232323" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5" d="M290 712 C286 730 290 745 298 758"/></g>
 </svg>

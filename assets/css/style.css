@@ -86,6 +86,11 @@ em{font-style:italic}
   color:var(--muted);
 }
 
+/* names keep their capital even inside lowercase labels */
+.micro__name{text-transform:none}
+/* the hero portrait's breeze stops while the hero is off screen */
+.hero__mark.is-still .strand{animation-play-state:paused}
+
 /* torn masking tape with a typewriter label */
 .tape{
   position:relative;display:inline-flex;align-items:center;gap:10px;

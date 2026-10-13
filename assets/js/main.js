@@ -137,7 +137,10 @@
     }, { passive: true });
     document.documentElement.addEventListener('pointerleave', function () { cx = cy = null; queue(); });
     if (hasIO) {
-      new IntersectionObserver(function (e) { heroVisible = e[0].isIntersecting; }).observe(hero);
+      new IntersectionObserver(function (e) {
+        heroVisible = e[0].isIntersecting;
+        card.classList.toggle('is-still', !heroVisible);   // pause the hair breeze off screen
+      }).observe(hero);
     }
 
     // Swap the <img> for the same SVG inline so the pupils can move. Any mark file

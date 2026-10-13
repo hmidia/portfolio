@@ -27,7 +27,10 @@ assets/
   only handwriting on the site.
 - **Icons:** Phosphor (regular weight, from unpkg).
 - **Mark (placeholder):** a brush line portrait with "midi" lettered across the neck.
-  - `assets/svg/midi-mark.svg`: portrait + lettering, used in the hero on a taped paper card.
+  - `assets/svg/midi-mark.svg`: the portrait alone, used in the hero on a taped paper card. Paths with
+    `class="pupil"` follow the cursor; groups with `class="strand"` sway slowly (the animation lives
+    inside the SVG's own `<style>`). Bump the `?v=` on its `<img>` in `index.html` when you replace it,
+    so returning visitors don't see a cached copy.
   - `assets/svg/midi-word.svg`: lettering only, used in the nav (inverted to paper white by CSS).
   - `assets/svg/midi-favicon.svg`: lettering on a cream tile.
 
